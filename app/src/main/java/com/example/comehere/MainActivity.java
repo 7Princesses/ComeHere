@@ -15,9 +15,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        tvText = (TextView) findViewById(R.id.text);
-        tvText.setText(HelloKt.formatMessage("Android With Kotlin!"));
-        //
     }
 }
