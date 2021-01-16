@@ -18,5 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
         tvText = (TextView) findViewById(R.id.text);
         tvText.setText(HelloKt.formatMessage("Android With Kotlin!"));
+        //
     }
 }
