@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "253687049986",
+    "project_id": "comehere-cd02d",
+    "storage_bucket": "comehere-cd02d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:253687049986:android:0a369e26ee849c95899c1b",
+        "android_client_info": {
+          "package_name": "com.example.comehere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "253687049986-2rkebqvj5p2vedhlvar6jhi71k1a47f3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.comehere",
+            "certificate_hash": "99b45c62a9088afe681aff34b6fbd022cf6ac121"
+          }
+        },
+        {
+          "client_id": "253687049986-3as99jvpkqoqurc3eoafvi4ro35j861h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiETR8i8rHDT8BdSY_s48TWuiMGo42X0w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "253687049986-3as99jvpkqoqurc3eoafvi4ro35j861h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
