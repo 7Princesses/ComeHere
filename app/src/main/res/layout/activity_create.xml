@@ -7,128 +7,144 @@
     android:orientation="vertical"
     tools:context=".CreateActivity">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:gravity="left"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical"
+        android:layout_gravity="center">
 
-        <!--btn_capture : 사진 촬영-->
-        <Button
-            android:id="@+id/btn_capture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="사진"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <ImageView
-            android:id="@+id/iv_result"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="130dp" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <!---->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/id1"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:hint="제목" />
+                <!--btn_capture : 사진 촬영-->
+                <Button
+                    android:id="@+id/btn_capture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="사진"/>
 
-    <EditText
-        android:id="@+id/id2"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:hint="거래위치" />
+            </LinearLayout>
 
-    <EditText
-        android:id="@+id/link_write"
-        android:autoLink="web"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:inputType="textWebEditText"
-        android:hint="url" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/test"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:id="@+id/iv_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp" />
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="140dp"
-            android:layout_height="80dp"
-            android:gravity="left"
-            android:orientation="horizontal">
+            <!---->
 
             <EditText
-                android:id="@+id/info_write1"
-                android:layout_width="120dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:hint="가격" />
+                android:id="@+id/id1"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:hint="제목" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/id2"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:hint="거래위치" />
+
+            <EditText
+                android:id="@+id/link_write"
+                android:autoLink="web"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:inputType="textWebEditText"
+                android:hint="url" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/info_write1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:hint="가격" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="원" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="200dp"
+                    android:layout_height="80dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/info_write2"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:hint="단위" />
+
+                    <Spinner
+                        android:id="@+id/spinner_unit"
+                        android:gravity="right"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"/>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/info_write3"
+                        android:layout_width="100dp"
+                        android:gravity="center"
+                        android:layout_height="match_parent"
+                        android:hint="수량" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/id4"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="원" />
+                android:inputType="text|textMultiLine"
+                android:hint="게시글 내용을 입력하세요."
+                android:minLines="3"
+                android:scrollbars="vertical"
+                android:maxLength="1000"
+                />
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="140dp"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+    </ScrollView>
 
-            <EditText
-                android:id="@+id/info_write2"
-                android:layout_width="60dp"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:hint="단위" />
-
-            <Spinner
-                android:id="@+id/spinner_unit"
-                android:gravity="right"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"/>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="70dp"
-            android:layout_height="80dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/info_write3"
-                android:layout_width="70dp"
-                android:gravity="center"
-                android:layout_height="match_parent"
-                android:hint="수량" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/id4"
-        android:autoLink="web"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:inputType="textWebEditText"
-        android:hint="내용"
-        android:maxLength="1000"
-        />
 </LinearLayout>
