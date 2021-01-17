@@ -6,22 +6,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 public class CreateActivity extends AppCompatActivity {
     Button add_pic;
+    TextView test;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
 
         add_pic = findViewById(R.id.btn_capture);
+        test = findViewById(R.id.test);
         add_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 makeDialog();
             }
         });
+
+        //Spinner
+        Spinner unit_spinner = (Spinner)findViewById(R.id.spinner_unit);
+        ArrayAdapter unit_Adapter = ArrayAdapter.createFromResource(this,R.array.unit, android.R.layout.simple_spinner_item);
+        unit_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        unit_spinner.setAdapter((unit_Adapter));
     }
 
     private void makeDialog() {
@@ -43,8 +54,10 @@ public class CreateActivity extends AppCompatActivity {
     }
 
     private void takePhoto() {
+        test.setText("카메라 촬영");
     }
 
     private void selectAlbum() {
+        test.setText("앨범에서 선택");
     }
 }
