@@ -38,7 +38,7 @@ public class CreateActivity extends AppCompatActivity {
     private static final int FROM_CAMERA = 0;
     private static final int FROM_ALBUM = 1;
     private String imageFilePath;
-    private Uri photoUri;
+    private Uri cam_photoUri,albumURI,al_photoUri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,18 +66,17 @@ public class CreateActivity extends AppCompatActivity {
         AlertDialog.Builder alt_dia = new AlertDialog.Builder(CreateActivity.this);
         alt_dia.setTitle("사진 업로드");
 
-        //권한 체크
-        TedPermission.with(getApplicationContext())
-                .setPermissionListener(permissionListener)
-                .setRationaleMessage("카메라 권한이 필요합니다.") //권한 팝업창
-                .setDeniedMessage("거부하셨습니다.")
-                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA)
-                .check();
-
         alt_dia.setItems(items,
                 new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+                        //권한 체크
+                        TedPermission.with(getApplicationContext())
+                                .setPermissionListener(permissionListener)
+                                .setRationaleMessage("카메라 권한이 필요합니다.") //권한 팝업창
+                                .setDeniedMessage("거부하셨습니다.")
+                                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA)
+                                .check();
                         if(id==0)
                             selectAlbum();
                         else
@@ -101,7 +100,7 @@ public class CreateActivity extends AppCompatActivity {
             }
             if(photoFile != null){
                 Uri providerURI = FileProvider.getUriForFile(this,getPackageName(),photoFile);
-                photoUri = providerURI;
+                cam_photoUri = providerURI;
                 startActivityForResult(intent,FROM_CAMERA);
             }
         }
@@ -126,8 +125,11 @@ public class CreateActivity extends AppCompatActivity {
         return imageFile;
     }
 
+    //앨범열기
     private void selectAlbum() {
-        test.setText("앨범에서 선택");
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+        startActivityForResult(intent,FROM_ALBUM);
     }
 
     @Override
@@ -138,19 +140,38 @@ public class CreateActivity extends AppCompatActivity {
             return;
         }
 
-        if(requestCode == FROM_ALBUM){
-            setImage();
-        }
-        else if(requestCode==FROM_CAMERA){
-            setImage();
-        }
+        if(requestCode == FROM_ALBUM && resultCode==RESULT_OK){
+            File albumFile = null;
+            try{
+                albumFile = createImageFile();
+            }
+            catch (IOException e){
+                e.printStackTrace();
+            }
 
-
+            if(albumFile != null){
+                albumURI = Uri.fromFile(albumFile);
+            }
+            al_photoUri = data.getData();
+            test.setText("앨범");
+        }
+        else if(requestCode==FROM_CAMERA && resultCode==RESULT_OK){
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            ImageView imageView = (ImageView)findViewById(R.id.iv_result);
+            if(photo != null){
+                imageView.setImageBitmap(photo);
+                test.setText("사진");
+            }
+            else{
+                test.setText("없음");
+            }
+        }
     }
 
     private void setImage() {
         ImageView imageView = (ImageView)findViewById(R.id.iv_result);
-        Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath);
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath,options);
         imageView.setImageBitmap(bitmap);
     }
 
