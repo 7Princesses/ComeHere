@@ -65,6 +65,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Custom
                 Intent intent = new Intent(v.getContext(), ChatActivity.class);
                 intent.putExtra("cr_name", cr_List.get(position).getRoomName());
                 intent.putExtra("username", username);
+                intent.putExtra("master", cr_List.get(position).getMaster());
                 v.getContext().startActivity(intent);
             }
         });

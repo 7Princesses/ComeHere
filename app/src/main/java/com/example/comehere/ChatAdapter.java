@@ -11,62 +11,66 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> {
-    private List<ChatData> mDataset;
-    private String myName;
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder> {
+    private List<ChatData> cList;
+    private String username;
+    private String master;
+    public static class ChatViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_name;
         public TextView tv_msg;
-        public MyViewHolder(View v) {
+        public ChatViewHolder(View v) {
             super(v);
             tv_name = v.findViewById(R.id.tv_name);
             tv_msg = v.findViewById(R.id.tv_msg);
         }
     }
 
-
-    public ChatAdapter(List<ChatData> myDataset, Context context, String myName) {
-        mDataset = myDataset;
-        this.myName = myName;
+    public ChatAdapter(List<ChatData> myDataset, Context context, String username, String master) {
+        cList = myDataset;
+        this.username = username;
+        this.master = master;
     }
 
 
     @Override
-    public ChatAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ChatAdapter.ChatViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LinearLayout v = (LinearLayout) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.row_chat, parent, false);
 
-        MyViewHolder vh = new MyViewHolder(v);
-        return vh;
+        ChatViewHolder holder = new ChatViewHolder(v);
+        return holder;
     }
 
-
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        ChatData chat = mDataset.get(position);
+    public void onBindViewHolder(ChatViewHolder holder, int position) {
+        ChatData chat = cList.get(position);
 
         holder.tv_name.setText(chat.getName());
         holder.tv_msg.setText(chat.getMsg());
 
-        if(chat.getName().equals(this.myName)) {
+        if(chat.getName().equals(this.username)) {
             holder.tv_msg.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
             holder.tv_name.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
         }
         else {
             holder.tv_msg.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
-            holder.tv_name.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+            holder.tv_msg.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
         }
 
+        if(chat.getName().equals(this.master)){
+            String m_name = holder.tv_msg.getText().toString() + " 👑";
+            holder.tv_msg.setText(m_name);
+        }
     }
 
 
     @Override
     public int getItemCount() {
-        return mDataset == null ? 0 :  mDataset.size();
+        return cList == null ? 0 :  cList.size();
     }
 
     public void addChat(ChatData chat) {
-        mDataset.add(chat);
-        notifyItemInserted(mDataset.size()-1);
+        cList.add(chat);
+        notifyItemInserted(cList.size()-1);
     }
 }

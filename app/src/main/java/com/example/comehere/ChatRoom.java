@@ -3,6 +3,8 @@ package com.example.comehere;
 import java.util.List;
 
 public class ChatRoom {
+
+    private String master;
     private String roomName;
     private List<String> chatRoomUsers;
     int maxNum;
@@ -39,4 +41,9 @@ public class ChatRoom {
     public void setCurrentNum(int currentNum) {
         this.currentNum = currentNum;
     }
+
+    public String getMaster() { return master; }
+
+    public void setMaster(String master) { this.master = master; }
+
 }

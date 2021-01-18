@@ -28,7 +28,7 @@ public class ChatListActivity extends AppCompatActivity {
     private DatabaseReference dbReference;
 
     // 임시 사용자 이름
-    private String username = new ArrayList<>(Arrays.asList("kim", "lee", "park", "choi")).get(2);
+    private String username = new ArrayList<>(Arrays.asList("kim", "lee", "park", "choi")).get(3);
     /* //임시 채팅방 입력
         ChatRoom cr = new ChatRoom();
         cr.setCurrentNum(3);

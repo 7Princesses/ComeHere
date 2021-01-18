@@ -34,6 +34,7 @@ public class ChatActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference dbReference;
     private String username;
+    private String master;
 
 
     @Override
@@ -44,6 +45,7 @@ public class ChatActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance(dburl);
         dbReference = database.getReference("ChatRoom/" + getIntent().getStringExtra("cr_name"));
         username = getIntent().getStringExtra("username");
+        master = getIntent().getStringExtra("master");
 
         bt_chat_send = findViewById(R.id.bt_chat_send);
         et_chat_box = findViewById(R.id.et_chat_box);
@@ -70,7 +72,7 @@ public class ChatActivity extends AppCompatActivity {
         cRecyclerView.setLayoutManager(cLayoutManager);
 
         chatDataList = new ArrayList<>();
-        cAdapter = new ChatAdapter(chatDataList, ChatActivity.this, username);
+        cAdapter = new ChatAdapter(chatDataList, ChatActivity.this, username, master);
         cRecyclerView.setAdapter(cAdapter);
 
 
