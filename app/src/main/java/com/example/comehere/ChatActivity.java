@@ -18,7 +18,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
@@ -32,13 +31,9 @@ public class ChatActivity extends AppCompatActivity {
     private Button bt_chat_send;
 
     private String dburl = "https://comehere-cd02d-default-rtdb.firebaseio.com/";
-    private FirebaseDatabase database = FirebaseDatabase.getInstance(dburl);
-    private DatabaseReference myRef = database.getReference("message/user");
-
-
-    // 임시 이름
-    private String name1 = "user1";
-    private String name2 = "user3";
+    private FirebaseDatabase database;
+    private DatabaseReference dbReference;
+    private String username;
 
 
     @Override
@@ -46,8 +41,13 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        database = FirebaseDatabase.getInstance(dburl);
+        dbReference = database.getReference("ChatRoom/" + getIntent().getStringExtra("cr_name"));
+        username = getIntent().getStringExtra("username");
+
         bt_chat_send = findViewById(R.id.bt_chat_send);
         et_chat_box = findViewById(R.id.et_chat_box);
+
 
         bt_chat_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,11 +55,11 @@ public class ChatActivity extends AppCompatActivity {
                 String msg = et_chat_box.getText().toString();
                 if(msg != null) {
                     ChatData chat = new ChatData();
-                    chat.setName(name2);    //sender name
+                    chat.setName(username);
                     chat.setMsg(msg);
                     et_chat_box.setText(null);
 
-                    myRef.push().setValue(chat);
+                    dbReference.push().setValue(chat);
                 }
             }
         });
@@ -70,16 +70,16 @@ public class ChatActivity extends AppCompatActivity {
         cRecyclerView.setLayoutManager(cLayoutManager);
 
         chatDataList = new ArrayList<>();
-        cAdapter = new ChatAdapter(chatDataList, ChatActivity.this, name2);     // app user name
+        cAdapter = new ChatAdapter(chatDataList, ChatActivity.this, username);
         cRecyclerView.setAdapter(cAdapter);
 
-        myRef.addChildEventListener(new ChildEventListener() {
+
+        dbReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 ChatData chat = dataSnapshot.getValue(ChatData.class);
                 ((ChatAdapter)cAdapter).addChat(chat);
             }
-
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
             @Override

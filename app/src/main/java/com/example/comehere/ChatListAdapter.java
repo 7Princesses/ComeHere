@@ -1,6 +1,7 @@
 package com.example.comehere;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +18,10 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Custom
 
     private ArrayList<ChatRoom> cr_List;
     private Context cr_Context;
+    private String username;
 
-    public ChatListAdapter(ArrayList<ChatRoom> cr_List, Context cr_Context) {
+    public ChatListAdapter(String username, ArrayList<ChatRoom> cr_List, Context cr_Context) {
+        this.username = username;
         this.cr_List = cr_List;
         this.cr_Context = cr_Context;
     }
@@ -39,10 +42,10 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Custom
         this.cr_Context = cr_Context;
     }
 
+
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.e("oncreateviewholder", "called");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_chat_room, parent, false);
         CustomViewHolder holder = new CustomViewHolder(view);
 
@@ -50,13 +53,21 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.Custom
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CustomViewHolder holder, final int position) {
         String status_str = cr_List.get(position).getCurrentNum() + " / "
                             + cr_List.get(position).getMaxNum();
-
-        Log.e("room_status_str", status_str);
         holder.tv_cr_status.setText(status_str);
         holder.tv_cr_name.setText(cr_List.get(position).getRoomName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ChatActivity.class);
+                intent.putExtra("cr_name", cr_List.get(position).getRoomName());
+                intent.putExtra("username", username);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

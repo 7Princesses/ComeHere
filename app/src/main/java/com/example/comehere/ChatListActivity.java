@@ -27,8 +27,15 @@ public class ChatListActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference dbReference;
 
-    // 임시 사용자 이름(비교용)
-    private String username = "lee";
+    // 임시 사용자 이름
+    private String username = new ArrayList<>(Arrays.asList("kim", "lee", "park", "choi")).get(2);
+    /* //임시 채팅방 입력
+        ChatRoom cr = new ChatRoom();
+        cr.setCurrentNum(3);
+        cr.setMaxNum(10);
+        cr.setRoomName("testroom1");
+        cr.setChatRoomUsers(Arrays.asList("lee", "choi", "park"));
+        dbReference.push().setValue(cr);*/
 
 
     @Override
@@ -43,16 +50,8 @@ public class ChatListActivity extends AppCompatActivity {
         cr_List = new ArrayList<>();
 
         database = FirebaseDatabase.getInstance(dburl);
-        dbReference = database.getReference("ChatRoom");
+        dbReference = database.getReference("ChatRoomInfo");
 
-
-        /* 임시 채팅방 입력
-        ChatRoom cr = new ChatRoom();
-        cr.setCurrentNum(3);
-        cr.setMaxNum(10);
-        cr.setRoomName("testroom1");
-        cr.setChatRoomUsers(Arrays.asList("lee", "choi", "park"));
-        dbReference.push().setValue(cr);*/
 
         dbReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -60,8 +59,7 @@ public class ChatListActivity extends AppCompatActivity {
                 cr_List.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     ChatRoom room = snapshot.getValue(ChatRoom.class);
-
-                    if(room.getChatRoomUsers().contains(username)) cr_List.add(room);
+                    if(room.getChatRoomUsers().contains(username)) cr_List.add(room);   // 임시 사용자
                 }
                 callBack(cr_List);
             }
@@ -74,7 +72,7 @@ public class ChatListActivity extends AppCompatActivity {
     }
 
     private void callBack(ArrayList<ChatRoom> cr){
-        cr_Adapter = new ChatListAdapter(cr, this);
+        cr_Adapter = new ChatListAdapter(username, cr, this);
         cr_RecyclerView.setAdapter(cr_Adapter);
         cr_Adapter.notifyDataSetChanged();
     }
