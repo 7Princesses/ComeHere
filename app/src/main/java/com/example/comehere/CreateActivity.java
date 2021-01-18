@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -39,6 +40,8 @@ public class CreateActivity extends AppCompatActivity {
     private static final int FROM_ALBUM = 1;
     private String imageFilePath;
     private Uri cam_photoUri,albumURI,al_photoUri;
+    ArrayList imageList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,15 +104,24 @@ public class CreateActivity extends AppCompatActivity {
             if(photoFile != null){
                 Uri providerURI = FileProvider.getUriForFile(this,getPackageName(),photoFile);
                 cam_photoUri = providerURI;
+                intent.putExtra(MediaStore.EXTRA_OUTPUT,cam_photoUri);
                 startActivityForResult(intent,FROM_CAMERA);
             }
         }
     }
 
+    //앨범열기
+    private void selectAlbum() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+        startActivityForResult(intent,FROM_ALBUM);
+    }
+
     //이미지 생성
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "img_"+timeStamp +"_";  //파일 이름
+        String imageFileName = "img_"+timeStamp +".jpg";  //파일 이름
 
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         if(!storageDir.exists()){
@@ -125,12 +137,7 @@ public class CreateActivity extends AppCompatActivity {
         return imageFile;
     }
 
-    //앨범열기
-    private void selectAlbum() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-        startActivityForResult(intent,FROM_ALBUM);
-    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -152,8 +159,52 @@ public class CreateActivity extends AppCompatActivity {
             if(albumFile != null){
                 albumURI = Uri.fromFile(albumFile);
             }
-            al_photoUri = data.getData();
-            test.setText("앨범");
+            ClipData clipData = data.getClipData();
+
+            if(clipData.getItemCount() >10){
+                Toast.makeText(CreateActivity.this,"사진은 10개까지 선택가능 합니다.",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            else if(clipData.getItemCount()>1 && clipData.getItemCount()<10){
+                for(int i=0; i<clipData.getItemCount();i++){
+                    imageList.add(String.valueOf(clipData.getItemAt(i).getUri()));
+                }
+            }
+            if(clipData!=null){
+                for(int i=0; i<5;i++){
+                    if(i<clipData.getItemCount()){
+                        Uri urione = clipData.getItemAt(i).getUri();
+                        if(i==0){
+                            ImageView imageView = (ImageView)findViewById(R.id.iv_result);
+                            imageView.setImageURI(urione);
+                        }
+                        else if(i==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.iv_result2);
+                            imageView.setImageURI(urione);
+                        }
+                        else if(i==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.iv_result3);
+                            imageView.setImageURI(urione);
+                        }
+                        else if(i==3){
+                            ImageView imageView = (ImageView)findViewById(R.id.iv_result4);
+                            imageView.setImageURI(urione);
+                        }
+                        else if(i==4){
+                            ImageView imageView = (ImageView)findViewById(R.id.iv_result5);
+                            imageView.setImageURI(urione);
+                        }
+                        else if(i==5){
+                            ImageView imageView = (ImageView)findViewById(R.id.iv_result6);
+                            imageView.setImageURI(urione);
+                        }
+                    }
+                }
+            }
+            else if(al_photoUri!=null){
+                test.setText("취소");
+            }
+
         }
         else if(requestCode==FROM_CAMERA && resultCode==RESULT_OK){
             Bitmap photo = (Bitmap) data.getExtras().get("data");
