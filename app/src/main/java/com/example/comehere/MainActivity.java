@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.comhere.HelloKt;
-
 public class MainActivity extends AppCompatActivity {
 
     TextView tvText;

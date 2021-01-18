@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ChatActivity extends AppCompatActivity {
@@ -32,7 +33,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private String dburl = "https://comehere-cd02d-default-rtdb.firebaseio.com/";
     private FirebaseDatabase database = FirebaseDatabase.getInstance(dburl);
-    private DatabaseReference myRef = database.getReference("message");
+    private DatabaseReference myRef = database.getReference("message/user");
 
 
     // 임시 이름
@@ -71,8 +72,6 @@ public class ChatActivity extends AppCompatActivity {
         chatDataList = new ArrayList<>();
         cAdapter = new ChatAdapter(chatDataList, ChatActivity.this, name2);     // app user name
         cRecyclerView.setAdapter(cAdapter);
-
-
 
         myRef.addChildEventListener(new ChildEventListener() {
             @Override

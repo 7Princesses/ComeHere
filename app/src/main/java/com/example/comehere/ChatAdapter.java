@@ -17,12 +17,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_name;
         public TextView tv_msg;
-        public View rootView;
         public MyViewHolder(View v) {
             super(v);
             tv_name = v.findViewById(R.id.tv_name);
             tv_msg = v.findViewById(R.id.tv_msg);
-            rootView = v;
         }
     }
 
@@ -65,10 +63,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
     @Override
     public int getItemCount() {
         return mDataset == null ? 0 :  mDataset.size();
-    }
-
-    public ChatData getChat(int position) {
-        return mDataset != null ? mDataset.get(position) : null;
     }
 
     public void addChat(ChatData chat) {
