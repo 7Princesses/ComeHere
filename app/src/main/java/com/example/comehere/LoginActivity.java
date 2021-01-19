@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
@@ -92,6 +94,18 @@ public class LoginActivity extends AppCompatActivity {
                                 finish();
                             } else {
                                 if (task.getException() != null) {
+                                    try {
+                                        throw task.getException();
+                                    }catch (FirebaseAuthInvalidCredentialsException e) {
+                                        // 비밀번호 일치x
+                                        startToast("비밀번호가 일치하지 않습니다.");
+                                    }catch (FirebaseAuthInvalidUserException e) {
+                                        // 없는 이메일
+                                        startToast("존재하지 않는 이메일입니다.");
+                                    }catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
                                     // If sign in fails, display a message to the user.
                                     startToast(task.getException().toString());
                                 }
