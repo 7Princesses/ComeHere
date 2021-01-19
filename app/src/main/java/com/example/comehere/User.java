@@ -5,16 +5,14 @@ import android.content.Intent;
 public class User {
     private String UID;
     private String nickname;
-    private String phone;
     private String school;
     private Integer studentId;
 
     public User() {}
 
-    public User(String uid, String nickname, String phone, String school, Integer studentId) {
+    public User(String uid, String nickname, String school, Integer studentId) {
         this.UID = uid;
         this.nickname = nickname;
-        this.phone = phone;
         this.school = school;
         this.studentId = studentId;
     }
@@ -33,14 +31,6 @@ public class User {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getSchool() {

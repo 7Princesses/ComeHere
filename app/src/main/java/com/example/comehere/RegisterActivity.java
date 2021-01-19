@@ -6,17 +6,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +34,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 
@@ -60,6 +67,21 @@ public class RegisterActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,"image/*");
                 startActivityForResult(intent, GET_GALLERY_IMAGE);
+            }
+        });
+
+        // Underline
+        TextView textView = (TextView)findViewById(R.id.loginButton);
+        SpannableString content = new SpannableString("로그인하기");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0); textView.setText(content);
+
+        // login button click listner
+        TextView loginButoon = (TextView)findViewById(R.id.loginButton);
+        loginButoon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                RegisterActivity.this.startActivity(loginIntent);
             }
         });
 
@@ -117,12 +139,11 @@ public class RegisterActivity extends AppCompatActivity {
                                     // User data
                                     String uid = user.getUid();
                                     String nickname = ((EditText)findViewById(R.id.nicknameText)).getText().toString().trim();
-                                    String phone = ((EditText)findViewById(R.id.phoneText)).getText().toString().trim();
                                     String school = ((Spinner)findViewById(R.id.schoolSpinner)).getSelectedItem().toString();
                                     Integer sId = Integer.parseInt(((EditText)findViewById(R.id.studentIdText)).getText().toString().trim());
 
                                     // User object save in firebase
-                                    User inputUser = new User(uid, nickname, phone, school, sId);
+                                    User inputUser = new User(uid, nickname, school, sId);
                                     FirebaseDatabase database= FirebaseDatabase.getInstance();
                                     DatabaseReference reference = database.getReference("User");
                                     reference.child(uid).setValue(inputUser);

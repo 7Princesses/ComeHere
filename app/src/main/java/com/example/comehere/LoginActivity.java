@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -45,8 +48,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize Firebase Auth
+        // Initialize Firebase Auth기
         mAuth = FirebaseAuth.getInstance();
+
+        // Underline
+        TextView textView = (TextView)findViewById(R.id.registerButton);
+        SpannableString content = new SpannableString("회원가입하기");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0); textView.setText(content);
 
         // register button click listner
         TextView registerButton = (TextView) findViewById(R.id.registerButton);
