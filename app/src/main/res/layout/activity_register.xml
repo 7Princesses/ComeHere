@@ -53,7 +53,7 @@
                 android:inputType="textPassword"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:hint="비밀번호"
+                android:hint="비밀번호 (6글자 이상)"
                 android:layout_gravity="center"
                 android:padding="10dp"
                 android:textColor="#ffffff"
@@ -80,6 +80,20 @@
                 android:background="@color/colorPrimary"/>
 
             <EditText
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:hint="닉네임"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"
+                android:id="@+id/nicknameText"
+                android:drawableStart="@drawable/ic_person_black_24dp"
+                android:drawableLeft="@drawable/ic_person_black_24dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorPrimary"/>
+
+            <EditText
                 android:inputType="phone"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
@@ -94,21 +108,16 @@
                 android:layout_marginTop="10dp"
                 android:background="@color/colorPrimary"/>
 
-            <EditText
+            <Spinner
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
-                android:hint="학교명"
                 android:layout_gravity="center"
-                android:padding="10dp"
-                android:textColor="#ffffff"
-                android:textColorHint="#ffffff"
-                android:id="@+id/schoolText"
-                android:drawableStart="@drawable/ic_school_black_24dp"
-                android:drawableLeft="@drawable/ic_school_black_24dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/colorPrimary"/>
+                android:id="@+id/schoolSpinner">
+            </Spinner>
 
             <EditText
+                android:inputType="number"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:hint="학번"

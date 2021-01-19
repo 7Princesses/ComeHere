@@ -13,16 +13,29 @@ import android.provider.MediaStore;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
+
+    private ArrayAdapter adapter;
+    private Spinner spinner;
 
     private final int GET_GALLERY_IMAGE = 200;
     private ImageView imageView;
@@ -49,8 +62,14 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivityForResult(intent, GET_GALLERY_IMAGE);
             }
         });
+
+        // school spinner
+        spinner = (Spinner)findViewById(R.id.schoolSpinner);
+        adapter = ArrayAdapter.createFromResource(this, R.array.school, android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
 
+    // register button click listner
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -78,31 +97,90 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    // sign up function
     private void signUp() {
         String email = ((EditText)findViewById(R.id.emailText)).getText().toString();
         String password = ((EditText)findViewById(R.id.passwordText)).getText().toString();
+        String passwordCheck = ((EditText)findViewById(R.id.passwordCheckText)).getText().toString();
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            // UI Logic when success
+        if (email.length() > 0 && password.length() > 0 && passwordCheck.length() > 0) {
+            if (password.equals(passwordCheck)) {
+                // password same password check
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    FirebaseUser user = mAuth.getCurrentUser();
 
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                            startActivity(intent);
+                                    // User data
+                                    String uid = user.getUid();
+                                    String nickname = ((EditText)findViewById(R.id.nicknameText)).getText().toString().trim();
+                                    String phone = ((EditText)findViewById(R.id.phoneText)).getText().toString().trim();
+                                    String school = ((Spinner)findViewById(R.id.schoolSpinner)).getSelectedItem().toString();
+                                    Integer sId = Integer.parseInt(((EditText)findViewById(R.id.studentIdText)).getText().toString().trim());
 
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            // UI Logic when failed
-                        }
+                                    // User object save in firebase
+                                    User inputUser = new User(uid, nickname, phone, school, sId);
+                                    FirebaseDatabase database= FirebaseDatabase.getInstance();
+                                    DatabaseReference reference = database.getReference("User");
+                                    reference.child(uid).setValue(inputUser);
 
-                        // ...
-                    }
-                });
+                                    // set current user profile
+                                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                            .setDisplayName(nickname) // if you want add the profile photo
+                                            .build();
+
+                                    user.updateProfile(profileUpdates)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Log.d(TAG, "User profile updated");
+                                                    }
+                                                }
+                                            });
+
+                                    // UI Logic when success
+                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                    startToast(nickname + "님의 가입을 환영합니다!.");
+
+                                } else {
+                                    if (task.getException() != null) {
+                                        // If sign in fails, display a message to the user.
+                                        try {
+                                            throw task.getException();
+                                        }catch (FirebaseAuthUserCollisionException e) {
+                                            startToast("이미 존재하는 이메일입니다.");
+                                            findViewById(R.id.emailText).requestFocus();
+                                        } catch (FirebaseAuthWeakPasswordException e) {
+                                            startToast("비밀번호를 6자리 이상 입력해주세요.");
+                                            findViewById(R.id.passwordText).requestFocus();
+                                        } catch (Exception e) {
+                                            startToast(e.toString());
+                                        }
+
+                                        startToast(task.getException().toString());
+                                        // UI Logic when failed
+                                    }
+                                }
+                            }
+                        });
+
+            }else{
+                // password not same passwordcheck
+                startToast("비밀번호가 일치하지 않습니다.");
+            }
+        }else {
+            startToast("이메일 또는 비밀번호를 입력해주세요.");
+        }
+
+    }
+
+    private void startToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }
