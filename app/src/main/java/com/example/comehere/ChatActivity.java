@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +36,7 @@ public class ChatActivity extends AppCompatActivity {
     private DatabaseReference dbReference;
     private String username;
     private String master;
+    private String cr_name;
 
 
     @Override
@@ -43,9 +45,11 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         database = FirebaseDatabase.getInstance(dburl);
-        dbReference = database.getReference("ChatRoom/" + getIntent().getStringExtra("cr_name"));
         username = getIntent().getStringExtra("username");
         master = getIntent().getStringExtra("master");
+        cr_name = getIntent().getStringExtra("cr_name");
+        dbReference = database.getReference("ChatRoom/" + cr_name);
+
 
         bt_chat_send = findViewById(R.id.bt_chat_send);
         et_chat_box = findViewById(R.id.et_chat_box);
@@ -74,6 +78,8 @@ public class ChatActivity extends AppCompatActivity {
         chatDataList = new ArrayList<>();
         cAdapter = new ChatAdapter(chatDataList, ChatActivity.this, username, master);
         cRecyclerView.setAdapter(cAdapter);
+
+        ((TextView)findViewById(R.id.room_name)).setText(cr_name);
 
 
         dbReference.addChildEventListener(new ChildEventListener() {
