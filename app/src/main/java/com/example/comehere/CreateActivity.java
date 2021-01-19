@@ -11,6 +11,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -41,7 +43,8 @@ public class CreateActivity extends AppCompatActivity {
     private String imageFilePath;
     private Uri cam_photoUri,albumURI,al_photoUri;
     ArrayList imageList = new ArrayList<>();
-
+    ArrayList image_view = new ArrayList<>();
+    ImageView iv_result,iv_result2,iv_result3,iv_result4,iv_result5,iv_result6;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,15 @@ public class CreateActivity extends AppCompatActivity {
 
         add_pic = findViewById(R.id.btn_capture);
         test = findViewById(R.id.test);
+
+        iv_result = findViewById(R.id.iv_result);
+        iv_result2 = findViewById(R.id.iv_result2);
+        iv_result3 = findViewById(R.id.iv_result3);
+        iv_result4 = findViewById(R.id.iv_result4);
+        iv_result5 = findViewById(R.id.iv_result5);
+        iv_result6 = findViewById(R.id.iv_result6);
+
+
         add_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,11 +177,48 @@ public class CreateActivity extends AppCompatActivity {
                 Toast.makeText(CreateActivity.this,"사진은 10개까지 선택가능 합니다.",Toast.LENGTH_SHORT).show();
                 return;
             }
-            else if(clipData.getItemCount()>1 && clipData.getItemCount()<10){
+            else if(clipData.getItemCount()>=1 && clipData.getItemCount()<10){
                 for(int i=0; i<clipData.getItemCount();i++){
-                    imageList.add(String.valueOf(clipData.getItemAt(i).getUri()));
+                   // Uri urione = clipData.getItemAt(i).getUri();
+                   // imageList.add(urione);
+                }
+
+                for(int i=0; i<5;i++){
+                    if(i<clipData.getItemCount()){
+                        Uri urione = clipData.getItemAt(i).getUri();
+                        if(i==0){
+                            ImageView imageView = (ImageView)findViewById(R.id.iv_result);
+                            imageView.setImageURI(urione);
+                        }
+                        else if(i==1){
+                            ImageView imageView = (ImageView)findViewById(R.id.iv_result2);
+                            imageView.setImageURI(urione);
+                        }
+                        else if(i==2){
+                            ImageView imageView = (ImageView)findViewById(R.id.iv_result3);
+                            imageView.setImageURI(urione);
+                        }
+                        else if(i==3){
+                            ImageView imageView = (ImageView)findViewById(R.id.iv_result4);
+                            imageView.setImageURI(urione);
+                        }
+                        else if(i==4){
+                            ImageView imageView = (ImageView)findViewById(R.id.iv_result5);
+                            imageView.setImageURI(urione);
+                        }
+                        else if(i==5){
+                            ImageView imageView = (ImageView)findViewById(R.id.iv_result6);
+                            imageView.setImageURI(urione);
+                        }
+                        /*
+                        if(i==0){
+                            ImageView imageView = (ImageView)findViewById(R.id.iv_result);
+                            imageView.setImageURI(imageList.get(i));
+                        }*/
+                    }
                 }
             }
+            /*
             if(clipData!=null){
                 for(int i=0; i<5;i++){
                     if(i<clipData.getItemCount()){
@@ -203,20 +252,60 @@ public class CreateActivity extends AppCompatActivity {
             }
             else if(al_photoUri!=null){
                 test.setText("취소");
-            }
+            }*/
 
         }
         else if(requestCode==FROM_CAMERA && resultCode==RESULT_OK){
+            Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath);
+            ExifInterface exif = null;
+
+            try {
+                exif = new ExifInterface(imageFilePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            int exifOrientation;
+            int exifDegree;
+
+            if (exif != null) {
+                exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                exifDegree = exifOrientationToDegrees(exifOrientation);
+            } else {
+                exifDegree = 0;
+            }
+
+            iv_result.setImageBitmap(rotate(bitmap,exifDegree));
+
+            /*
             Bitmap photo = (Bitmap) data.getExtras().get("data");
-            ImageView imageView = (ImageView)findViewById(R.id.iv_result);
+            //ImageView imageView = (ImageView)findViewById(R.id.iv_result);
             if(photo != null){
-                imageView.setImageBitmap(photo);
+                iv_result.setImageBitmap(photo);
                 test.setText("사진");
             }
             else{
                 test.setText("없음");
             }
+            */
+
         }
+    }
+
+    private int exifOrientationToDegrees(int exifOrientation) {
+        if(exifOrientation == ExifInterface.ORIENTATION_ROTATE_90)
+            return 90;
+        else if(exifOrientation == ExifInterface.ORIENTATION_ROTATE_180)
+            return 180;
+        else if(exifOrientation == ExifInterface.ORIENTATION_ROTATE_270)
+            return 270;
+        return 0;
+    }
+
+    private Bitmap rotate(Bitmap bitmap, float degree){
+        Matrix matrix = new Matrix();
+        matrix.postRotate(degree);
+        return Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(), bitmap.getHeight(),matrix,true);
     }
 
     private void setImage() {
