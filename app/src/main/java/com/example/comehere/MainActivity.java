@@ -34,14 +34,28 @@ public class MainActivity extends AppCompatActivity {
         mainAdapter = new MainAdapter(arrayList);
         recyclerView.setAdapter(mainAdapter);
 
-        Button btn_add = (Button)findViewById(R.id.btn_add);
-        btn_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainData mainData = new MainData(R.drawable.ic_launcher_background, "휴지 나눔",500,"개",5);
-                arrayList.add(mainData);
-                mainAdapter.notifyDataSetChanged();
-            }
-        });
+        MainData mainData1 = new MainData("@mipmap/ic_launcher", "휴지 나눔",500,"개",5,7);
+        arrayList.add(mainData1);
+        mainAdapter.notifyDataSetChanged();
+        MainData mainData2 = new MainData("@mipmap/ic_launcher", "바디워시 나눔",500,"개",5,7);
+        arrayList.add(mainData2);
+        mainAdapter.notifyDataSetChanged();
+        MainData mainData3 = new MainData("@mipmap/ic_launcher", "마하그리드 옷",500,"개",5,7);
+        arrayList.add(mainData3);
+        mainAdapter.notifyDataSetChanged();
+        MainData mainData4 = new MainData("@mipmap/ic_launcher", "휴지 나눔",500,"개",5,7);
+        arrayList.add(mainData4);
+        mainAdapter.notifyDataSetChanged();
+        MainData mainData5 = new MainData("@mipmap/ic_launcher", "휴지 나눔",500,"개",5,7);
+        arrayList.add(mainData5);
+        mainAdapter.notifyDataSetChanged();
+        MainData mainData6 = new MainData("@mipmap/ic_launcher", "휴지 나눔",500,"개",5,7);
+        arrayList.add(mainData6);
+        mainAdapter.notifyDataSetChanged();
+        MainData mainData7 = new MainData("@mipmap/ic_launcher", "휴지 나눔",500,"개",5,7);
+        arrayList.add(mainData7);
+        mainAdapter.notifyDataSetChanged();
+
+
     }
 }

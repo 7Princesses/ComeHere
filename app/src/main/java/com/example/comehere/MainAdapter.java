@@ -36,12 +36,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
         Glide.with(holder.itemView)
-                .load(arrayList.get(position).getPhoto())
-                .into(holder.iv_photo);
-        holder.tv_title.setText(arrayList.get(position).getTitle());
-        holder.tv_price.setText(String.valueOf(arrayList.get(position).getPrice()));
-        holder.tv_remain.setText(String.valueOf(arrayList.get(position).getRemain()));
-        holder.tv_unit.setText(arrayList.get(position).getUnit());
+                .load(arrayList.get(position).getImageIv())
+                .into(holder.imageIv);
+        holder.titleTv.setText(arrayList.get(position).getTitleTv());
+        holder.priceTv.setText(String.valueOf(arrayList.get(position).getPriceTv()));
+        holder.remain.setText(String.valueOf(arrayList.get(position).getRemain()));
+        holder.stick.setText(String.valueOf(arrayList.get(position).getStick()));
+        holder.unitTv.setText(arrayList.get(position).getUnitTv());
     }
 
     @Override
@@ -50,19 +51,21 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.CustomViewHold
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
-        ImageView iv_photo;
-        TextView tv_title;
-        TextView tv_unit;
-        TextView tv_price;
-        TextView tv_remain;
+        ImageView imageIv;
+        TextView titleTv;
+        TextView unitTv;
+        TextView priceTv;
+        TextView stick;
+        TextView remain;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.iv_photo = itemView.findViewById(R.id.iv_photo);
-            this.tv_price = itemView.findViewById(R.id.tv_price);
-            this.tv_title = itemView.findViewById(R.id.tv_title);
-            this.tv_unit = itemView.findViewById(R.id.tv_unit);
-            this.tv_remain = itemView.findViewById(R.id.tv_remain);
+            this.imageIv = itemView.findViewById(R.id.imageIv);
+            this.priceTv = itemView.findViewById(R.id.priceTv);
+            this.titleTv = (TextView)itemView.findViewById(R.id.titleTv);
+            this.unitTv = (TextView)itemView.findViewById(R.id.unitTv);
+            this.remain = itemView.findViewById(R.id.remain);
+            this.stick = itemView.findViewById(R.id.stick);
         }
     }
 }

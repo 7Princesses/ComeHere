@@ -2,50 +2,61 @@ package com.example.comehere;
 
 public class MainData {
 
-    private int photo; //용품 사진
-    private String title; //제목
-    private int price; //단위 당 가격
-    private String unit; //단위 이름
-    private int remain; //남은 수량
+    private String imageIv; //list에 들어가는 사진
+    private String titleTv; //list 제목
+    private int priceTv; //가격
+    private String unitTv; //단위
+    private int stick; //붙은수량
+    private int remain; //남은수량
 
-    public MainData(int photo, String title, int price, String unit, int remain) {
-        this.photo = photo;
-        this.title = title;
-        this.price = price;
-        this.unit = unit;
+    public MainData(String imageIv, String titleTv, int priceTv, String unitTv, int stick, int remain) {
+        this.imageIv = imageIv;
+        this.titleTv = titleTv;
+        this.priceTv = priceTv;
+        this.unitTv = unitTv;
+        this.stick = stick;
         this.remain = remain;
     }
 
-    public int getPhoto() {
-        return photo;
+
+    public String getImageIv() {
+        return imageIv;
     }
 
-    public void setPhoto(int photo) {
-        this.photo = photo;
+    public void setImageIv(String imageIv) {
+        this.imageIv = imageIv;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTitleTv() {
+        return titleTv;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitleTv(String titleTv) {
+        this.titleTv = titleTv;
     }
 
-    public int getPrice() {
-        return price;
+    public int getPriceTv() {
+        return priceTv;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setPriceTv(int priceTv) {
+        this.priceTv = priceTv;
     }
 
-    public String getUnit() {
-        return unit;
+    public String getUnitTv() {
+        return unitTv;
     }
 
-    public void setUnit(String unit_name) {
-        this.unit = unit_name;
+    public void setUnitTv(String unitTv) {
+        this.unitTv = unitTv;
+    }
+
+    public int getStick() {
+        return stick;
+    }
+
+    public void setStick(int stick) {
+        this.stick = stick;
     }
 
     public int getRemain() {
@@ -55,5 +66,4 @@ public class MainData {
     public void setRemain(int remain) {
         this.remain = remain;
     }
-
 }
