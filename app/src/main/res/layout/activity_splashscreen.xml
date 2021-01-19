@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/splash"
-        android:background="@drawable/splash_img" />
+        android:background="@drawable/splash" />
     <!--이후에 splash이미지 넣어주면 돌아감-->
 
 </LinearLayout>
