@@ -19,12 +19,14 @@
             android:textColor="#717171"
             android:textSize="18sp"/>
         <TextView
-            android:drawableStart="@drawable/icon_crmaster"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/icon_crmaster"
             android:id="@+id/tv_master"
-            android:text=" "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="visible"/>
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginHorizontal="5dp"
+            android:visibility="gone"/>
     </LinearLayout>
     <TextView
         android:text="$chat"
@@ -34,6 +36,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#717171"
-        android:background="@drawable/chatbubble01"
+        android:background="@drawable/bg_chatbubble_other"
         android:textSize="18sp"/>
 </LinearLayout>

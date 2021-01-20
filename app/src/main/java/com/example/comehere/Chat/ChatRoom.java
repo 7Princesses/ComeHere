@@ -1,4 +1,4 @@
-package com.example.comehere;
+package com.example.comehere.Chat;
 
 import java.util.List;
 

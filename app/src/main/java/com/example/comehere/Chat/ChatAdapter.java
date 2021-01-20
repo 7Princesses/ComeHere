@@ -1,6 +1,5 @@
-package com.example.comehere;
+package com.example.comehere.Chat;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -9,8 +8,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.comehere.R;
 
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         holder.tv_msg.setText(chat.getMsg());
 
         if(chat.getName().equals(this.username)) {
-            holder.tv_msg.setBackgroundResource(R.drawable.chatbubble02);
+            holder.tv_msg.setBackgroundResource(R.drawable.bg_chatbubble_me);
             holder.chat_align.setGravity(Gravity.RIGHT);
         }
         else {

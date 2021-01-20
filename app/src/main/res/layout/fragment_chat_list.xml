@@ -24,15 +24,26 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text=" 채팅방"
-                android:drawableStart="@drawable/icon_chat"
-                android:textColor="#4a4a4a"
-                android:textSize="20sp" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/icon_nav_chat" />
+                <TextView
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:text=" 채팅방"
+                    android:textColor="#4A4A4A"
+                    android:textSize="20sp" />
+            </LinearLayout>
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="2dp"

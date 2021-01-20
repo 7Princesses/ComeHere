@@ -1,4 +1,4 @@
-package com.example.comehere;
+package com.example.comehere.Chat;
 
 public class ChatData {
     //DTO
