@@ -7,8 +7,10 @@ import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -42,9 +44,12 @@ public class CreateActivity extends AppCompatActivity {
     private static final int FROM_ALBUM = 1;
     private String imageFilePath;
     private Uri cam_photoUri,albumURI,al_photoUri;
-    ArrayList imageList = new ArrayList<>();
+    ArrayList<Bitmap> imageList = new ArrayList<Bitmap>();
     ArrayList image_view = new ArrayList<>();
+
     ImageView iv_result,iv_result2,iv_result3,iv_result4,iv_result5,iv_result6;
+
+    private int count=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +64,6 @@ public class CreateActivity extends AppCompatActivity {
         iv_result4 = findViewById(R.id.iv_result4);
         iv_result5 = findViewById(R.id.iv_result5);
         iv_result6 = findViewById(R.id.iv_result6);
-
 
         add_pic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,8 +153,6 @@ public class CreateActivity extends AppCompatActivity {
         return imageFile;
     }
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -160,103 +162,43 @@ public class CreateActivity extends AppCompatActivity {
         }
 
         if(requestCode == FROM_ALBUM && resultCode==RESULT_OK){
-            File albumFile = null;
-            try{
-                albumFile = createImageFile();
-            }
-            catch (IOException e){
-                e.printStackTrace();
-            }
-
-            if(albumFile != null){
-                albumURI = Uri.fromFile(albumFile);
-            }
+            Bitmap bitmap = null;
             ClipData clipData = data.getClipData();
-
-            if(clipData.getItemCount() >10){
-                Toast.makeText(CreateActivity.this,"사진은 10개까지 선택가능 합니다.",Toast.LENGTH_SHORT).show();
-                return;
+            if((clipData.getItemCount()+count) >10){
+                Toast.makeText(getApplicationContext(),"10개 이상 선택되었습니다.",Toast.LENGTH_SHORT).show();
             }
-            else if(clipData.getItemCount()>=1 && clipData.getItemCount()<10){
-                for(int i=0; i<clipData.getItemCount();i++){
-                   // Uri urione = clipData.getItemAt(i).getUri();
-                   // imageList.add(urione);
-                }
+            else {
+                for (int i = 0; i < clipData.getItemCount(); i++) {
+                    String imagePath = getRealPathFromURI(clipData.getItemAt(i).getUri());
 
-                for(int i=0; i<5;i++){
-                    if(i<clipData.getItemCount()){
-                        Uri urione = clipData.getItemAt(i).getUri();
-                        if(i==0){
-                            ImageView imageView = (ImageView)findViewById(R.id.iv_result);
-                            imageView.setImageURI(urione);
-                        }
-                        else if(i==1){
-                            ImageView imageView = (ImageView)findViewById(R.id.iv_result2);
-                            imageView.setImageURI(urione);
-                        }
-                        else if(i==2){
-                            ImageView imageView = (ImageView)findViewById(R.id.iv_result3);
-                            imageView.setImageURI(urione);
-                        }
-                        else if(i==3){
-                            ImageView imageView = (ImageView)findViewById(R.id.iv_result4);
-                            imageView.setImageURI(urione);
-                        }
-                        else if(i==4){
-                            ImageView imageView = (ImageView)findViewById(R.id.iv_result5);
-                            imageView.setImageURI(urione);
-                        }
-                        else if(i==5){
-                            ImageView imageView = (ImageView)findViewById(R.id.iv_result6);
-                            imageView.setImageURI(urione);
-                        }
-                        /*
-                        if(i==0){
-                            ImageView imageView = (ImageView)findViewById(R.id.iv_result);
-                            imageView.setImageURI(imageList.get(i));
-                        }*/
+                    ExifInterface exif = null;
+
+                    try {
+                        exif = new ExifInterface(imagePath);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                }
-            }
-            /*
-            if(clipData!=null){
-                for(int i=0; i<5;i++){
-                    if(i<clipData.getItemCount()){
-                        Uri urione = clipData.getItemAt(i).getUri();
-                        if(i==0){
-                            ImageView imageView = (ImageView)findViewById(R.id.iv_result);
-                            imageView.setImageURI(urione);
-                        }
-                        else if(i==1){
-                            ImageView imageView = (ImageView)findViewById(R.id.iv_result2);
-                            imageView.setImageURI(urione);
-                        }
-                        else if(i==2){
-                            ImageView imageView = (ImageView)findViewById(R.id.iv_result3);
-                            imageView.setImageURI(urione);
-                        }
-                        else if(i==3){
-                            ImageView imageView = (ImageView)findViewById(R.id.iv_result4);
-                            imageView.setImageURI(urione);
-                        }
-                        else if(i==4){
-                            ImageView imageView = (ImageView)findViewById(R.id.iv_result5);
-                            imageView.setImageURI(urione);
-                        }
-                        else if(i==5){
-                            ImageView imageView = (ImageView)findViewById(R.id.iv_result6);
-                            imageView.setImageURI(urione);
-                        }
-                    }
-                }
-            }
-            else if(al_photoUri!=null){
-                test.setText("취소");
-            }*/
 
+                    int exifOrientation;
+                    int exifDegree;
+
+                    if (exif != null) {
+                        exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                        exifDegree = exifOrientationToDegrees(exifOrientation);
+                    } else {
+                        exifDegree = 0;
+                    }
+                    bitmap = BitmapFactory.decodeFile(imagePath);
+                    //bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),clipData.getItemAt(i).getUri());
+                    bitmap = rotate(bitmap, exifDegree);
+                    imageList.add(bitmap);
+                }
+                setImage();
+            }
         }
         else if(requestCode==FROM_CAMERA && resultCode==RESULT_OK){
             Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath);
+
             ExifInterface exif = null;
 
             try {
@@ -274,24 +216,27 @@ public class CreateActivity extends AppCompatActivity {
             } else {
                 exifDegree = 0;
             }
-
-            iv_result.setImageBitmap(rotate(bitmap,exifDegree));
-
-            /*
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            //ImageView imageView = (ImageView)findViewById(R.id.iv_result);
-            if(photo != null){
-                iv_result.setImageBitmap(photo);
-                test.setText("사진");
-            }
-            else{
-                test.setText("없음");
-            }
-            */
-
+            bitmap = rotate(bitmap,exifDegree);
+            imageList.add(bitmap);
+            setImage();
+            //iv_result.setImageBitmap(rotate(bitmap,exifDegree));
         }
     }
 
+    //사진 절대경로
+    private String getRealPathFromURI(Uri uri) {
+        int column_index=0;
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(uri,proj,null,null,null);
+
+        if(cursor.moveToFirst()){
+            column_index= cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        }
+
+        return cursor.getString(column_index);
+    }
+
+    //회전각 구하기
     private int exifOrientationToDegrees(int exifOrientation) {
         if(exifOrientation == ExifInterface.ORIENTATION_ROTATE_90)
             return 90;
@@ -302,24 +247,46 @@ public class CreateActivity extends AppCompatActivity {
         return 0;
     }
 
+    //회전
     private Bitmap rotate(Bitmap bitmap, float degree){
         Matrix matrix = new Matrix();
         matrix.postRotate(degree);
         return Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(), bitmap.getHeight(),matrix,true);
     }
 
+    //이미지 업로드
     private void setImage() {
-        ImageView imageView = (ImageView)findViewById(R.id.iv_result);
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath,options);
-        imageView.setImageBitmap(bitmap);
+        for(int i=0; i< imageList.size();i++){
+            Bitmap bitmap = imageList.get(i);
+            switch (i){
+                case 0:
+                    iv_result.setImageBitmap(bitmap);
+                    break;
+                case 1:
+                    iv_result2.setImageBitmap(bitmap);
+                    break;
+                case 2:
+                    iv_result3.setImageBitmap(bitmap);
+                    break;
+                case 3:
+                    iv_result4.setImageBitmap(bitmap);
+                    break;
+                case 4:
+                    iv_result5.setImageBitmap(bitmap);
+                    break;
+                case 5:
+                    iv_result6.setImageBitmap(bitmap);
+                    break;
+            }
+        }
+        count = imageList.size();
     }
 
     PermissionListener permissionListener =new PermissionListener() {
         @Override
         //권한 허용했을 때
         public void onPermissionGranted() {
-            Toast.makeText(getApplicationContext(),"권한이 허용됨",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),"권한이 허용됨",Toast.LENGTH_SHORT).show();
         }
 
         @Override
