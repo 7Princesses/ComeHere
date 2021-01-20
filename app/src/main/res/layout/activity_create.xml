@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CreateActivity">
+    tools:context=".CreateActivity"
+    android:background="#FFFFFFFF">
 
     <ScrollView
         android:id="@+id/first_scroll"
@@ -93,42 +94,56 @@
             <!---->
 
             <EditText
-                android:id="@+id/id1"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:hint="상품명" />
+                android:id="@+id/productTitle"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:hint="  상품명"
+                android:textColor="#FF707070"
+                android:background="@drawable/rounded_input"/>
 
             <EditText
-                android:id="@+id/id2"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:hint="거래위치" />
+                android:id="@+id/totalPrice"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
+                android:hint="  총 가격"
+                android:textColor="#FF707070"
+                android:background="@drawable/rounded_input"/>
 
             <EditText
-                android:id="@+id/link_write"
+                android:id="@+id/productLink"
                 android:autoLink="web"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:padding="10dp"
                 android:inputType="textWebEditText"
-                android:hint="url" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="left"
-                android:orientation="horizontal">
+                android:hint="  URL"
+                android:textColor="#FF707070"
+                android:drawableLeft="@drawable/link"
+                android:background="@drawable/rounded_input"/>
 
-                <EditText
-                    android:id="@+id/info_write1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+            <Spinner
+                android:id="@+id/positionSpinner"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/position_spinner_bg"/>
 
-                    android:hint="가격" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="원" />
-            </LinearLayout>
+            <Spinner
+                android:id="@+id/categorySpinner"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/spinner_bg"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -136,53 +151,47 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="200dp"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/count_spinner"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/spinner_bg"/>
 
-                    <EditText
-                        android:id="@+id/info_write2"
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:hint="단위" />
-
-                    <Spinner
-                        android:id="@+id/spinner_unit"
-                        android:gravity="right"
-                        android:layout_width="100dp"
-                        android:layout_height="50dp"/>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="150dp"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/info_write3"
-                        android:layout_width="100dp"
-                        android:gravity="center"
-                        android:layout_height="match_parent"
-                        android:hint="수량" />
-                </LinearLayout>
+                <Spinner
+                    android:id="@+id/spinner_unit"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/spinner_bg"/>
 
             </LinearLayout>
 
             <EditText
                 android:id="@+id/id4"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="350dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center"
                 android:inputType="text|textMultiLine"
-                android:hint="게시글 내용을 입력하세요."
+                android:hint="  내용을 입력해주세요."
                 android:minLines="3"
                 android:scrollbars="vertical"
                 android:maxLength="1000"
+                android:background="@drawable/rounded_input"
                 />
+
+            <Button
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:background="@drawable/rounded_edittext_button"
+                android:text="글 게시하기"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:id="@+id/postButton"/>
 
         </LinearLayout>
 
