@@ -3,18 +3,24 @@ package com.example.comehere;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.text.Editable;
 import android.text.SpannableString;
+import android.text.TextWatcher;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,6 +43,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
 import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -50,6 +57,8 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
     private FirebaseAuth mAuth;
 
+    private Drawable pwcheckDrawable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         findViewById(R.id.registerButton).setOnClickListener(onClickListener);
 
-        // 학생증 사진 관련 코드
+        // Student card Image code
         imageView = (ImageView)findViewById(R.id.studentCardImage);
         imageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -75,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
         SpannableString content = new SpannableString("로그인하기");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0); textView.setText(content);
 
-        // login button click listner
+        // login button click listener
         TextView loginButoon = (TextView)findViewById(R.id.loginButton);
         loginButoon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,11 +96,39 @@ public class RegisterActivity extends AppCompatActivity {
 
         // school spinner
         spinner = (Spinner)findViewById(R.id.schoolSpinner);
-        adapter = ArrayAdapter.createFromResource(this, R.array.school, android.R.layout.simple_spinner_dropdown_item);
+        adapter = new ArrayAdapter<String>(this, R.layout.select_spinner, getResources().getStringArray(R.array.school));
+        adapter.setDropDownViewResource(R.layout.custom_spinner);
         spinner.setAdapter(adapter);
+
+        // password check
+        final EditText pwcheck = (EditText)findViewById(R.id.passwordCheckText);
+        final EditText pw = (EditText)findViewById(R.id.passwordText);
+        final ImageView setImage = (ImageView)findViewById(R.id.pwImage);
+
+        pwcheck.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (pw.getText().toString().equals(pwcheck.getText().toString())) {
+                    setImage.setImageResource(R.drawable.pwok);
+                }else {
+                    setImage.setImageResource(R.drawable.pwno);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
     }
 
-    // register button click listner
+    // register button click listener
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
