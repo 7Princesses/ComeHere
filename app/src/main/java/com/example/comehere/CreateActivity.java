@@ -50,6 +50,10 @@ public class CreateActivity extends AppCompatActivity {
     ImageView iv_result,iv_result2,iv_result3,iv_result4,iv_result5,iv_result6;
 
     private int count=0;
+    private String dburl = "https://comehere-cd02d-default-rtdb.firebaseio.com/";
+
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +81,48 @@ public class CreateActivity extends AppCompatActivity {
         ArrayAdapter unit_Adapter = ArrayAdapter.createFromResource(this,R.array.unit, android.R.layout.simple_spinner_item);
         unit_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         unit_spinner.setAdapter((unit_Adapter));
+
+        // Spinner category
+        Spinner category_spinner = (Spinner)findViewById(R.id.categorySpinner);
+        ArrayAdapter category_adapter = new ArrayAdapter<String>(this, R.layout.select_spinner, getResources().getStringArray(R.array.category));
+        category_adapter.setDropDownViewResource(R.layout.custom_spinner);
+        category_spinner.setAdapter(category_adapter);
+
+        // Spinner count
+        Spinner count_spinner = (Spinner)findViewById(R.id.count_spinner);
+        ArrayAdapter count_adapter = new ArrayAdapter<String>(this, R.layout.select_spinner, getResources().getStringArray(R.array.counting));
+        category_adapter.setDropDownViewResource(R.layout.custom_spinner);
+        count_spinner.setAdapter(count_adapter);
+
+        // Spinner position
+        Spinner position_spinner = (Spinner)findViewById(R.id.positionSpinner);
+        ArrayAdapter position_adapter = new ArrayAdapter<String>(this, R.layout.select_spinner, getResources().getStringArray(R.array.position));
+        position_adapter.setDropDownViewResource(R.layout.custom_spinner);
+        position_spinner.setAdapter(position_adapter);
+
+        // post button listener
+        database = FirebaseDatabase.getInstance(dburl);
+        reference = database.getReference("Article");
+        Button postbtn = (Button)findViewById(R.id.postButton);
+        postbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // article data
+                String articleTitle = ((EditText)findViewById(R.id.articleTitle)).getText().toString();
+                String productName = ((EditText)findViewById(R.id.productTitle)).getText().toString();
+                Integer totalPrice = Integer.parseInt(((EditText)findViewById(R.id.totalPrice)).getText().toString());
+                String URL = ((EditText)findViewById(R.id.productLink)).getText().toString();
+                String tradePlace = ((Spinner)findViewById(R.id.positionSpinner)).getSelectedItem().toString();
+                String category = ((Spinner)findViewById(R.id.categorySpinner)).getSelectedItem().toString();
+                Integer productCount = Integer.parseInt(((Spinner)findViewById(R.id.count_spinner)).getSelectedItem().toString());
+                String unit = ((Spinner)findViewById(R.id.spinner_unit)).getSelectedItem().toString();
+                String content = ((EditText)findViewById(R.id.productContent)).getText().toString();
+                String uid = "5G8pWcXveSSUQKO6hZ6VIaeW8fg1"; // change the FirebaseUser user = mAuth.getCurrentUser();
+
+                Article article = new Article(articleTitle, productName, totalPrice, URL, tradePlace, category, productCount, unit, content, uid);
+                reference.push().setValue(article);
+            }
+        });
     }
 
     //다이얼로그 생성
