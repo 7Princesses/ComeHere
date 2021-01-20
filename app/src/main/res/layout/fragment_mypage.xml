@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyPageActivity"
+    android:background="@color/colorWhite">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/good" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="마이페이지"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGray">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="나의 정보"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/userNickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:text="chae0382"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@id/userNickname"
+                android:layout_toRightOf="@id/userNickname"
+                android:text="님"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/userId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="26dp"
+                android:layout_marginTop="55dp"
+                android:layout_marginBottom="20dp"
+                android:text="chae0382@gmail.com"
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@drawable/ic_launcher_background" />
+
+                <TextView
+                    android:id="@+id/school"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="인하대학교" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_marginLeft="26dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@drawable/ic_launcher_background" />
+
+                <TextView
+                    android:id="@+id/identity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="12191656" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGray">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="앱 설정"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="17dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/logout_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="50dp"
+                android:gravity="center"
+                android:text="로그아웃"
+                android:textSize="18sp" />
+
+            <ImageButton
+                android:id="@+id/logout"
+                android:layout_width="38dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="3dp"
+                android:background="@color/colorWhite"
+                android:src="@drawable/modify_icon" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGray">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="내가 쓴 글"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mypage_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            tools:listitem="@layout/mypage_list">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
+</FrameLayout>
