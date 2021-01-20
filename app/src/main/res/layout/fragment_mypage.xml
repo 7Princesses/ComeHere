@@ -22,7 +22,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/good" />
+                android:src="@drawable/mypage_icon" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -36,20 +36,19 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorGray">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:text="나의 정보"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+            android:layout_height="1dp"
+            android:background="@color/colorGray2">
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="나의 정보"
+            android:textSize="18sp"
+            android:textStyle="bold" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -59,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:text="chae0382"
                 android:textSize="25sp" />
 
@@ -67,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_toEndOf="@id/userNickname"
                 android:layout_toRightOf="@id/userNickname"
                 android:text="님"
@@ -78,8 +77,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="26dp"
-                android:layout_marginTop="55dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="45dp"
+                android:layout_marginBottom="10dp"
                 android:text="chae0382@gmail.com"
                 android:textSize="15sp" />
         </RelativeLayout>
@@ -95,16 +94,17 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_marginLeft="26dp"
                     android:layout_marginTop="2dp"
-                    android:src="@drawable/ic_launcher_background" />
+                    android:src="@drawable/school_icon" />
 
                 <TextView
                     android:id="@+id/school"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="4dp"
                     android:text="인하대학교" />
             </LinearLayout>
@@ -115,14 +115,15 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_marginLeft="26dp"
                     android:layout_marginTop="2dp"
-                    android:src="@drawable/ic_launcher_background" />
+                    android:src="@drawable/identity_icon" />
 
                 <TextView
                     android:id="@+id/identity"
+                    android:layout_marginLeft="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -134,19 +135,19 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorGray">
+            android:layout_height="1dp"
+            android:background="@color/colorGray2">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:text="앱 설정"
-                android:textSize="15sp"
-                android:textStyle="bold" />
         </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="앱 설정"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -183,25 +184,25 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorGray">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:text="내가 쓴 글"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+            android:layout_height="1dp"
+            android:background="@color/colorGray2">
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="내가 쓴 글"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mypage_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             tools:listitem="@layout/mypage_list">
 
