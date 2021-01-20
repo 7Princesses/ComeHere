@@ -96,7 +96,7 @@
                 android:id="@+id/id1"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:hint="제목" />
+                android:hint="상품명" />
 
             <EditText
                 android:id="@+id/id2"
