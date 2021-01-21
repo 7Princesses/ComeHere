@@ -30,7 +30,7 @@
             android:background="@drawable/rounded_edittext_input"/>
 
         <EditText
-            android:textSize="6pt"
+            android:textSize="15dp"
             android:inputType="textPassword"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginLeft="45dp"
+                android:layout_marginLeft="30dp"
                 android:background="@drawable/rounded_edittext_input"
                 android:drawableLeft="@drawable/ic_lock_black_24dp"
                 android:hint="  비밀번호를 확인해 주세요"
