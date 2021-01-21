@@ -7,14 +7,16 @@ public class User {
     private String nickname;
     private String school;
     private Integer studentId;
+    private String studentIdCard;
 
     public User() {}
 
-    public User(String uid, String nickname, String school, Integer studentId) {
+    public User(String uid, String nickname, String school, Integer studentId, String studentIdCard) {
         this.UID = uid;
         this.nickname = nickname;
         this.school = school;
         this.studentId = studentId;
+        this.studentIdCard = studentIdCard;
     }
 
     public String getUID() {
@@ -47,5 +49,13 @@ public class User {
 
     public void setStudentId(Integer studentId) {
         this.studentId = studentId;
+    }
+
+    public String getStudentIdCard() {
+        return studentIdCard;
+    }
+
+    public void setStudentIdCard(String studentIdCard) {
+        this.studentIdCard = studentIdCard;
     }
 }
