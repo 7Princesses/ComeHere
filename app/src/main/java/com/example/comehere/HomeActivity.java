@@ -28,28 +28,30 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void onButtonClick(View view) {
+        //넘기는거 이름을 이채연거랑 머지한 후 ArticleListActivity 로 바꾸고 testactivity는 지워도됨
+        Intent intent = new Intent(HomeActivity.this,TestActivity.class);
         switch (view.getId()){
             case R.id.btn_cosmetic:
-                //화장품에 대한 정보를 넘겨줄 준비
+                intent.putExtra("category", "cosmetic");
             case R.id.btn_bathroom:
-                //
+                intent.putExtra("category", "bathroom");
             case R.id.btn_food:
-                //
+                intent.putExtra("category", "food");
             case R.id.btn_interior:
-                //
+                intent.putExtra("category", "interior");
             case R.id.btn_clean:
-                //
+                intent.putExtra("category", "clean");
             case R.id.btn_cloth:
-                //
+                intent.putExtra("category", "cloth");
             case R.id.btn_phrase:
-                //
+                intent.putExtra("category", "phrase");
             case R.id.btn_kitchen:
-                //
+                intent.putExtra("category", "kitchen");
             case R.id.btn_etc:
-                //
+                intent.putExtra("category", "etc");
             default:
-                Intent intent = new Intent(HomeActivity.this,TestActivity.class);
-                startActivity(intent);
+               //
         }
+        startActivity(intent);
     }
 }
