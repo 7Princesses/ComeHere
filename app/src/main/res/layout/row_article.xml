@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/imageIv"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toEndOf="@id/imageIv"
+            android:layout_toRightOf="@id/imageIv"
+            android:text="글 제목"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/priceTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleTv"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@id/imageIv"
+            android:layout_toRightOf="@id/imageIv"
+            android:text="가격"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleTv"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@id/priceTv"
+            android:layout_toRightOf="@id/priceTv"
+            android:text="원("
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/unitTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleTv"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@id/open"
+            android:layout_toRightOf="@id/open"
+            android:text="단위"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titleTv"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@id/unitTv"
+            android:layout_toRightOf="@id/unitTv"
+            android:text=")"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_below="@id/priceTv"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="2dp"
+            android:layout_toLeftOf="@id/tx"
+            android:src="@drawable/good" />
+        <TextView
+            android:id="@+id/tx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/priceTv"
+            android:gravity="right"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="2dp"
+            android:layout_toLeftOf="@id/stick"
+            android:text="붙은수량:"
+            android:textSize="10sp" />
+        <TextView
+            android:id="@+id/stick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/priceTv"
+            android:gravity="right"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="4dp"
+            android:text="붙은수량"
+           android:textSize="10sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tx"
+            android:gravity="right"
+            android:layout_toLeftOf="@id/remain"
+            android:text="남은수량:"
+            android:textSize="10sp" />
+        <TextView
+            android:id="@+id/remain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tx"
+            android:gravity="right"
+            android:layout_alignParentRight="true"
+            android:text="남은수량"
+            android:textSize="10sp" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
