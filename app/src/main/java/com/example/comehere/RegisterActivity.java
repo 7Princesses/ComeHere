@@ -124,6 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText pwcheck = (EditText)findViewById(R.id.passwordCheckText);
         final EditText pw = (EditText)findViewById(R.id.passwordText);
         final ImageView setImage = (ImageView)findViewById(R.id.pwImage);
+        setImage.setImageResource(R.drawable.pwno);
         pwcheck.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
