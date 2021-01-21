@@ -1,12 +1,9 @@
 package com.example.comehere;
 
 import android.content.Context;
-import android.graphics.drawable.GradientDrawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.CustomViewHolder> {
+public class MyPageArticleListAdapter extends RecyclerView.Adapter<MyPageArticleListAdapter.CustomViewHolder> {
 
     private ArrayList<ArticleData> arrayList;
     private Context context;
 
-    public ArticleListAdapter(ArrayList<ArticleData> arrayList, Context context) {
+    public MyPageArticleListAdapter(ArrayList<ArticleData> arrayList, Context context) {
         this.arrayList = arrayList;
         this.context = context;
     }
@@ -77,11 +74,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-           // this.imageIv = itemView.findViewById(R.id.imageIv);
-            //GradientDrawable drawable = (GradientDrawable)context.getDrawable(R.drawable.image_round);
-            //imageIv.setBackground(drawable);
-            //imageIv.setClipToOutline(true);
-
+            //this.imageIv = itemView.findViewById(R.id.imageIv);
             this.priceTv = itemView.findViewById(R.id.priceTv);
             this.titleTv = (TextView)itemView.findViewById(R.id.titleTv);
             this.unitTv = (TextView)itemView.findViewById(R.id.unitTv);
