@@ -79,14 +79,14 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        // Underline
+        // Underline in TextView
         TextView textView = (TextView)findViewById(R.id.loginButton);
         SpannableString content = new SpannableString("로그인하기");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0); textView.setText(content);
 
         // login button click listener
-        TextView loginButoon = (TextView)findViewById(R.id.loginButton);
-        loginButoon.setOnClickListener(new View.OnClickListener() {
+        TextView loginButton = (TextView)findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -100,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(R.layout.custom_spinner);
         spinner.setAdapter(adapter);
 
-        // password check
+        // password check alarm
         final EditText pwcheck = (EditText)findViewById(R.id.passwordCheckText);
         final EditText pw = (EditText)findViewById(R.id.passwordText);
         final ImageView setImage = (ImageView)findViewById(R.id.pwImage);
@@ -114,8 +114,33 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (pw.getText().toString().equals(pwcheck.getText().toString())) {
+                    // password and password check is same
                     setImage.setImageResource(R.drawable.pwok);
                 }else {
+                    // password and password check is not same
+                    setImage.setImageResource(R.drawable.pwno);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        pw.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (pw.getText().toString().equals(pwcheck.getText().toString())) {
+                    // password and password check is same
+                    setImage.setImageResource(R.drawable.pwok);
+                }else {
+                    // password and password check is not same
                     setImage.setImageResource(R.drawable.pwno);
                 }
             }
@@ -149,7 +174,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        // error but build success
+        // Preferably don't fix err
         if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri selectedImageUri = data.getData();
             imageView.setImageURI(selectedImageUri);
