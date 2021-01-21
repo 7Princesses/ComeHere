@@ -60,7 +60,7 @@
                     android:fontFamily="@font/kopubworld_dotum_light"
                     android:text="$prodname"
                     android:textColor="#4a4a4a"
-                    android:textSize="17sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -86,7 +86,7 @@
                     android:fontFamily="@font/kopubworld_dotum_medium"
                     android:text="$nickname"
                     android:textColor="#4a4a4a"
-                    android:textSize="14sp"
+                    android:textSize="17sp"
                     android:background="@null"
                     app:layout_constraintStart_toStartOf="@+id/tv_product_name"
                     app:layout_constraintTop_toBottomOf="@+id/tv_product_name" />
@@ -108,7 +108,7 @@
                     android:fontFamily="@font/kopubworld_dotum_light"
                     android:text="$price"
                     android:textColor="#FF7600"
-                    android:textSize="15sp"
+                    android:textSize="17sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/horiLine" />
 
@@ -120,16 +120,16 @@
                     android:fontFamily="@font/kopubworld_dotum_light"
                     android:text="$current / $total"
                     android:textColor="#4a4a4a"
-                    android:textSize="14sp"
+                    android:textSize="17sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_product_price"
                     app:layout_constraintTop_toBottomOf="@+id/tv_product_price" />
 
                 <ImageView
                     android:id="@+id/id2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView4"
                     app:srcCompat="@drawable/icon_url" />
@@ -143,7 +143,7 @@
                     android:fontFamily="@font/kopubworld_dotum_light"
                     android:text="$url"
                     android:textColor="#4a4a4a"
-                    android:textSize="13sp"
+                    android:textSize="17sp"
                     android:textStyle="italic"
                     app:layout_constraintBottom_toBottomOf="@+id/id2"
                     app:layout_constraintStart_toEndOf="@+id/id2"
@@ -167,7 +167,7 @@
                     android:fontFamily="@font/kopubworld_dotum_light"
                     android:text="거래 위치"
                     android:textColor="#4a4a4a"
-                    android:textSize="13sp"
+                    android:textSize="17sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                     app:layout_constraintStart_toEndOf="@+id/imageView2"
                     app:layout_constraintTop_toTopOf="@+id/imageView2" />
@@ -180,7 +180,7 @@
                     android:fontFamily="@font/kopubworld_dotum_light"
                     android:text="$place"
                     android:textColor="#4a4a4a"
-                    android:textSize="11sp"
+                    android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="@+id/productLink"
                     app:layout_constraintStart_toEndOf="@+id/productLink"
                     app:layout_constraintTop_toTopOf="@+id/productLink" />
@@ -190,7 +190,7 @@
                     android:layout_width="125dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/quan_select_spinner_style"
                     android:spinnerMode="dropdown"
@@ -207,6 +207,7 @@
                     android:background="@drawable/purchase_btn_background_box"
                     android:fontFamily="@font/kopubworld_dotum_light"
                     android:text="구매신청"
+                    android:textSize="15dp"
                     android:textColor="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="@+id/spinner_quan"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -240,6 +241,7 @@
                     android:fontFamily="@font/kopubworld_dotum_light"
                     android:paddingHorizontal="15dp"
                     android:paddingTop="20dp"
+                    android:textSize="17dp"
                     android:text="$content"/>
             </LinearLayout>
 
