@@ -43,7 +43,6 @@ import java.util.Date;
 public class CreateActivity extends AppCompatActivity {
 
     private ImageButton add_pic;
-    private TextView test;
     private static final int FROM_CAMERA = 0;
     private static final int FROM_ALBUM = 1;
     private String imageFilePath;
@@ -64,7 +63,6 @@ public class CreateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create);
 
         add_pic = findViewById(R.id.btn_capture);
-        test = findViewById(R.id.test);
 
         iv_result = findViewById(R.id.iv_result);
         iv_result2 = findViewById(R.id.iv_result2);
@@ -213,8 +211,35 @@ public class CreateActivity extends AppCompatActivity {
 
         if(requestCode == FROM_ALBUM && resultCode==RESULT_OK){
             Bitmap bitmap = null;
+            al_photoUri = data.getData();
             ClipData clipData = data.getClipData();
-            if((clipData.getItemCount()+count) >10){
+            if(clipData == null){
+                String imagePath = getRealPathFromURI(al_photoUri);
+                //String imagePath = getRealPathFromURI(clipData.getItemAt(i).getUri());
+
+                ExifInterface exif = null;
+
+                try {
+                    exif = new ExifInterface(imagePath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                int exifOrientation;
+                int exifDegree;
+
+                if (exif != null) {
+                    exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                    exifDegree = exifOrientationToDegrees(exifOrientation);
+                } else {
+                    exifDegree = 0;
+                }
+                bitmap = BitmapFactory.decodeFile(imagePath);
+                //bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),clipData.getItemAt(i).getUri());
+                bitmap = rotate(bitmap, exifDegree);
+                imageList.add(bitmap);
+            }
+            else if((clipData.getItemCount() +count) >10){
                 Toast.makeText(getApplicationContext(),"10개 이상 선택되었습니다.",Toast.LENGTH_SHORT).show();
             }
             else {
