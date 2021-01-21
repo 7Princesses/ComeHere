@@ -278,11 +278,12 @@ public class CreateActivity extends AppCompatActivity {
                 bitmap = rotate(bitmap, exifDegree);
                 imageList.add(bitmap);
             }
-            else if((clipData.getItemCount() +count) >10){
+            else if((clipData.getItemCount() + count) >10){
                 Toast.makeText(getApplicationContext(),"10개 이상 선택되었습니다.",Toast.LENGTH_SHORT).show();
             }
             else {
-                for (int i = 0; i < clipData.getItemCount(); i++) {
+                int num = clipData.getItemCount();
+                for (int i = 0; i < num; i++) {
                     String imagePath = getRealPathFromURI(clipData.getItemAt(i).getUri());
 
                     ExifInterface exif = null;
