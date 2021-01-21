@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="school">
+        <item>학교를 선택하세요</item>
+        <item>인하대학교</item>
+        <item>한국대학교</item>
+    </string-array>
+</resources>
