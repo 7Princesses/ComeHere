@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.comehere.Chat.ChatListFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity_nav extends AppCompatActivity {
@@ -42,16 +41,16 @@ public class MainActivity_nav extends AppCompatActivity {
 
         Fragment fragment = fragmentManager.findFragmentByTag(tag);
         if (fragment == null) {
-            /*if (id == R.id.nav_home) {
-                // Fragment home
+            if (id == R.id.nav_home) {
+                fragment = new ArticleListFragment();
             } else if (id == R.id.nav_postwrite){
-                // Fragment postwrite
+                fragment = new ChatListFragment();
             } else if (id == R.id.nav_chat){
                 fragment = new ChatListFragment();
             } else {
-                // Fragment mypage
-            }*/
-            fragment = new ChatListFragment();
+                fragment = new MyPageFragment();
+            }
+
 
             fragmentTransaction.add(R.id.nav_content_layout, fragment, tag);
         } else {

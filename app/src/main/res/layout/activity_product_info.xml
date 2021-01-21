@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:orientation="vertical"
+            android:paddingBottom="50dp">
+
+
+                <!--제품 이미지-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:cardCornerRadius="50px"
+                app:cardElevation="0dp">
+
+                <ImageView
+                    android:id="@+id/img_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/shampoo2" />
+            </androidx.cardview.widget.CardView>
+
+
+
+            <!---->
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/tv_product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/kopubworld_dotum_light"
+                    android:text="$prodname"
+                    android:textColor="#4a4a4a"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_product_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/item_type_background_box"
+                    android:fontFamily="@font/kopubworld_dotum_light"
+                    android:text="$category"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_product_name"
+                    app:layout_constraintStart_toEndOf="@+id/tv_product_name"
+                    app:layout_constraintTop_toTopOf="@+id/tv_product_name" />
+
+                <Button
+                    android:id="@+id/tv_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:fontFamily="@font/kopubworld_dotum_medium"
+                    android:text="$nickname"
+                    android:textColor="#4a4a4a"
+                    android:textSize="14sp"
+                    android:background="@null"
+                    app:layout_constraintStart_toStartOf="@+id/tv_product_name"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_product_name" />
+
+                <View
+                    android:id="@+id/horiLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:background="#B1ACAC"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_profile" />
+
+                <TextView
+                    android:id="@+id/tv_product_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/kopubworld_dotum_light"
+                    android:text="$price"
+                    android:textColor="#FF7600"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/horiLine" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/kopubworld_dotum_light"
+                    android:text="$current / $total"
+                    android:textColor="#4a4a4a"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_product_price"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_product_price" />
+
+                <ImageView
+                    android:id="@+id/id2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4"
+                    app:srcCompat="@drawable/icon_url" />
+
+
+                <TextView
+                    android:id="@+id/tv_product_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/kopubworld_dotum_light"
+                    android:text="$url"
+                    android:textColor="#4a4a4a"
+                    android:textSize="13sp"
+                    android:textStyle="italic"
+                    app:layout_constraintBottom_toBottomOf="@+id/id2"
+                    app:layout_constraintStart_toEndOf="@+id/id2"
+                    app:layout_constraintTop_toTopOf="@+id/id2" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#9FFFFFFF"
+                    app:layout_constraintStart_toStartOf="@+id/id2"
+                    app:layout_constraintTop_toBottomOf="@+id/id2"
+                    app:srcCompat="@drawable/ic_mapping" />
+
+                <TextView
+                    android:id="@+id/productLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/kopubworld_dotum_light"
+                    android:text="거래 위치"
+                    android:textColor="#4a4a4a"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                    app:layout_constraintStart_toEndOf="@+id/imageView2"
+                    app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+                <TextView
+                    android:id="@+id/tv_product_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/kopubworld_dotum_light"
+                    android:text="$place"
+                    android:textColor="#4a4a4a"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/productLink"
+                    app:layout_constraintStart_toEndOf="@+id/productLink"
+                    app:layout_constraintTop_toTopOf="@+id/productLink" />
+
+                <Spinner
+                    android:id="@+id/spinner_quan"
+                    android:layout_width="125dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/quan_select_spinner_style"
+                    android:spinnerMode="dropdown"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_buy"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/productLink" />
+
+                <Button
+                    android:id="@+id/btn_buy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="@drawable/purchase_btn_background_box"
+                    android:fontFamily="@font/kopubworld_dotum_light"
+                    android:text="구매신청"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@+id/spinner_quan"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/spinner_quan"
+                    app:layout_constraintTop_toTopOf="@+id/spinner_quan" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <View
+                    android:id="@+id/horiLine2"
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_marginTop="8dp"
+                    android:background="#B1ACAC"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/kopubworld_dotum_light"
+                    android:paddingHorizontal="15dp"
+                    android:paddingTop="20dp"
+                    android:text="$content"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
