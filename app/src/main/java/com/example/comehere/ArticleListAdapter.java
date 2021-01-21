@@ -1,12 +1,11 @@
 package com.example.comehere;
 
 import android.content.Context;
-import android.graphics.drawable.GradientDrawable;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,10 +17,12 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
 
     private ArrayList<ArticleData> arrayList;
     private Context context;
+    private ArrayList<Integer> curNum;
 
-    public ArticleListAdapter(ArrayList<ArticleData> arrayList, Context context) {
+    public ArticleListAdapter(ArrayList<ArticleData> arrayList, ArrayList<Integer> curNum ,Context context) {
         this.arrayList = arrayList;
         this.context = context;
+        this.curNum = curNum;
     }
 
     @NonNull
@@ -39,11 +40,23 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
                 .load(arrayList.get(position).getImageIv())
                 .into(holder.imageIv);*/
 
-        holder.titleTv.setText(arrayList.get(position).getArticleTitle());
+        Log.e("post, curnum", arrayList.size() + " " + curNum.size());
+
+        final String prodName = arrayList.get(position).getProductName();
+        holder.titleTv.setText(prodName);
         holder.priceTv.setText(String.valueOf(arrayList.get(position).getTotalPrice()));
         holder.remain.setText(String.valueOf(arrayList.get(position).getProductCount()));
-        holder.stick.setText(String.valueOf(arrayList.get(position).getProductCount()));      // 수정 필요
+        holder.stick.setText(String.valueOf(curNum.get(position)));
         holder.unitTv.setText(arrayList.get(position).getUnit());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ProductInfo.class);
+                intent.putExtra("productName", prodName);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

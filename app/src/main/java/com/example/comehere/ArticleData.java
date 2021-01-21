@@ -1,7 +1,6 @@
 package com.example.comehere;
 
 public class ArticleData {
-    private String articleTitle;
     private String productName;
     private Integer totalPrice;
     private String URL;
@@ -12,9 +11,8 @@ public class ArticleData {
     private String content;
     private String UID;
 
-    public ArticleData(){}
-    public ArticleData(String articleCode, String productName, Integer totalPrice, String URL, String tradePlace, String category, Integer productCount, String unit, String content, String UID) {
-        this.articleTitle = articleCode;
+    public ArticleData() {}
+    public ArticleData(String productName, Integer totalPrice, String URL, String tradePlace, String category, Integer productCount, String unit, String content, String UID) {
         this.productName = productName;
         this.totalPrice = totalPrice;
         this.URL = URL;
@@ -96,13 +94,5 @@ public class ArticleData {
 
     public void setUID(String UID) {
         this.UID = UID;
-    }
-
-    public String getArticleTitle() {
-        return articleTitle;
-    }
-
-    public void setArticleTitle(String articleTitle) {
-        this.articleTitle = articleTitle;
     }
 }

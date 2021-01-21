@@ -9,8 +9,8 @@ public class UserData {
 
     public UserData() {}
 
-    public UserData(String UID, String nickname, String school, Integer studentId, String studentIdCard) {
-        this.UID = UID;
+    public UserData(String uid, String nickname, String school, Integer studentId, String studentIdCard) {
+        this.UID = uid;
         this.nickname = nickname;
         this.school = school;
         this.studentId = studentId;

@@ -36,7 +36,7 @@ public class MyPageArticleListAdapter extends RecyclerView.Adapter<MyPageArticle
                 .load(arrayList.get(position).getImageIv())
                 .into(holder.imageIv);*/
 
-        holder.titleTv.setText(arrayList.get(position).getArticleTitle());
+        holder.titleTv.setText(arrayList.get(position).getProductName());
         holder.priceTv.setText(String.valueOf(arrayList.get(position).getTotalPrice()));
         holder.remain.setText(String.valueOf(arrayList.get(position).getProductCount()));
         holder.stick.setText(String.valueOf(arrayList.get(position).getProductCount()));      // 수정 필요
