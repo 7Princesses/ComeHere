@@ -22,11 +22,15 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
@@ -38,7 +42,7 @@ import java.util.Date;
 
 public class CreateActivity extends AppCompatActivity {
 
-    private Button add_pic;
+    private ImageButton add_pic;
     private TextView test;
     private static final int FROM_CAMERA = 0;
     private static final int FROM_ALBUM = 1;
