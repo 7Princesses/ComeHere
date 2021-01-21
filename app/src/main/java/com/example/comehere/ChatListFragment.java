@@ -31,7 +31,11 @@ public class ChatListFragment extends Fragment {
     private FirebaseDatabase database;
     private DatabaseReference dbReference;
 
-    String username = "comehere_incheon";
+    private String username;
+
+    public ChatListFragment(String username){
+        this.username = username;
+    }
 
     @Nullable
     @Override

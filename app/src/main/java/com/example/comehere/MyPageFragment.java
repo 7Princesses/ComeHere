@@ -33,8 +33,11 @@ public class MyPageFragment extends Fragment {
     private RecyclerView atc_RecyclerView;
     private RecyclerView.Adapter atc_Adapter;
     private RecyclerView.LayoutManager atc_LayoutManager;
+    private String uid;
 
-    private String tempUid = "PjeqSwsCRghTCgwKHSdTovDlru72";
+    public MyPageFragment(String uid){
+        this.uid = uid;
+    }
 
 
     @Nullable
@@ -58,7 +61,7 @@ public class MyPageFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     UserData userData = snapshot.getValue(UserData.class);
-                    if(userData.getUID().equals(tempUid))
+                    if(userData.getUID().equals(uid))
                         mp_data = userData;
                 }
                 profileWrite();
@@ -91,7 +94,6 @@ public class MyPageFragment extends Fragment {
         atc_LayoutManager = new LinearLayoutManager(getActivity());
         atc_RecyclerView.setLayoutManager(atc_LayoutManager);
         atc_List = new ArrayList<>();
-        tempUid = mp_data.getUID(); //임시 uid
 
         database = FirebaseDatabase.getInstance(dburl);
         dbReference = database.getReference("Article");
@@ -102,7 +104,7 @@ public class MyPageFragment extends Fragment {
                 atc_List.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     ArticleData article = snapshot.getValue(ArticleData.class);
-                    if(article.getUID().equals(tempUid))   // uid 판별
+                    if(article.getUID().equals(uid))   // uid 판별
                         atc_List.add(article);
                 }
                 findCurNum();

@@ -30,8 +30,11 @@ public class ArticleListFragment extends Fragment {
     private FirebaseDatabase database;
     private DatabaseReference dbReference;
     private ArrayList<ChatRoom> allRooms;
+    private String category;
 
-    private String category = "food";
+    public ArticleListFragment(String category){
+        this.category = category;
+    }
 
     @Nullable
     @Override
@@ -66,7 +69,7 @@ public class ArticleListFragment extends Fragment {
                 atc_List.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     ArticleData article = snapshot.getValue(ArticleData.class);
-                    /*if(article.getCategory().equals(category)) */     // category 판별
+                    if(article.getCategory().equals(category))    // category 판별
                     atc_List.add(article);
                 }
                 findCurNum();
