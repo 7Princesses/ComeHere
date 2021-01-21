@@ -46,11 +46,10 @@ public class CreateActivity extends AppCompatActivity {
     private static final int FROM_CAMERA = 0;
     private static final int FROM_ALBUM = 1;
     private String imageFilePath;
-    private Uri cam_photoUri,albumURI,al_photoUri;
-    ArrayList<Bitmap> imageList = new ArrayList<Bitmap>();
-    ArrayList image_view = new ArrayList<>();
+    private Uri cam_photoUri,al_photoUri;
+    ArrayList<Bitmap> imageList = new ArrayList<Bitmap>();  //이미지가 bitmap으로 저장되어 있는 파일
 
-    ImageView iv_result,iv_result2,iv_result3,iv_result4,iv_result5,iv_result6;
+    ImageView iv_result1,iv_result2,iv_result3,iv_result4,iv_result5,iv_result6,iv_result7,iv_result8,iv_result9,iv_result10;
 
     private int count=0;
     private String dburl = "https://comehere-cd02d-default-rtdb.firebaseio.com/";
@@ -64,12 +63,16 @@ public class CreateActivity extends AppCompatActivity {
 
         add_pic = findViewById(R.id.btn_capture);
 
-        iv_result = findViewById(R.id.iv_result);
-        iv_result2 = findViewById(R.id.iv_result2);
-        iv_result3 = findViewById(R.id.iv_result3);
-        iv_result4 = findViewById(R.id.iv_result4);
-        iv_result5 = findViewById(R.id.iv_result5);
-        iv_result6 = findViewById(R.id.iv_result6);
+        iv_result1 = findViewById(R.id.iv_result1); iv_result1.setVisibility(View.GONE);
+        iv_result2 = findViewById(R.id.iv_result2); iv_result2.setVisibility(View.GONE);
+        iv_result3 = findViewById(R.id.iv_result3); iv_result3.setVisibility(View.GONE);
+        iv_result4 = findViewById(R.id.iv_result4); iv_result4.setVisibility(View.GONE);
+        iv_result5 = findViewById(R.id.iv_result5); iv_result5.setVisibility(View.GONE);
+        iv_result6 = findViewById(R.id.iv_result6); iv_result6.setVisibility(View.GONE);
+        iv_result7 = findViewById(R.id.iv_result7); iv_result7.setVisibility(View.GONE);
+        iv_result8 = findViewById(R.id.iv_result8); iv_result8.setVisibility(View.GONE);
+        iv_result9 = findViewById(R.id.iv_result9); iv_result9.setVisibility(View.GONE);
+        iv_result10 = findViewById(R.id.iv_result10); iv_result10.setVisibility(View.GONE);
 
         add_pic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,11 +81,11 @@ public class CreateActivity extends AppCompatActivity {
             }
         });
 
-        //Spinner
+        // Spinner unit
         Spinner unit_spinner = (Spinner)findViewById(R.id.spinner_unit);
-        ArrayAdapter unit_Adapter = ArrayAdapter.createFromResource(this,R.array.unit, android.R.layout.simple_spinner_item);
-        unit_Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        unit_spinner.setAdapter((unit_Adapter));
+        ArrayAdapter unit_adapter = new ArrayAdapter<String>(this, R.layout.select_spinner, getResources().getStringArray(R.array.unit));
+        unit_adapter.setDropDownViewResource(R.layout.custom_spinner);
+        unit_spinner.setAdapter(unit_adapter);
 
         // Spinner category
         Spinner category_spinner = (Spinner)findViewById(R.id.categorySpinner);
@@ -93,7 +96,7 @@ public class CreateActivity extends AppCompatActivity {
         // Spinner count
         Spinner count_spinner = (Spinner)findViewById(R.id.count_spinner);
         ArrayAdapter count_adapter = new ArrayAdapter<String>(this, R.layout.select_spinner, getResources().getStringArray(R.array.counting));
-        category_adapter.setDropDownViewResource(R.layout.custom_spinner);
+        count_adapter.setDropDownViewResource(R.layout.custom_spinner);
         count_spinner.setAdapter(count_adapter);
 
         // Spinner position
@@ -129,6 +132,13 @@ public class CreateActivity extends AppCompatActivity {
 
     //다이얼로그 생성
     private void makeDialog() {
+        //권한 체크
+        TedPermission.with(getApplicationContext())
+                .setPermissionListener(permissionListener)
+                .setRationaleMessage("카메라 권한이 필요합니다.") //권한 팝업창
+                .setDeniedMessage("거부하셨습니다.")
+                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA)
+                .check();
         final CharSequence[] items = {"앨범에서 선택","카메라 촬영"};
         AlertDialog.Builder alt_dia = new AlertDialog.Builder(CreateActivity.this);
         alt_dia.setTitle("사진 업로드");
@@ -137,13 +147,6 @@ public class CreateActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        //권한 체크
-                        TedPermission.with(getApplicationContext())
-                                .setPermissionListener(permissionListener)
-                                .setRationaleMessage("카메라 권한이 필요합니다.") //권한 팝업창
-                                .setDeniedMessage("거부하셨습니다.")
-                                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA)
-                                .check();
                         if(id==0)
                             selectAlbum();
                         else
@@ -215,7 +218,6 @@ public class CreateActivity extends AppCompatActivity {
             ClipData clipData = data.getClipData();
             if(clipData == null){
                 String imagePath = getRealPathFromURI(al_photoUri);
-                //String imagePath = getRealPathFromURI(clipData.getItemAt(i).getUri());
 
                 ExifInterface exif = null;
 
@@ -235,7 +237,6 @@ public class CreateActivity extends AppCompatActivity {
                     exifDegree = 0;
                 }
                 bitmap = BitmapFactory.decodeFile(imagePath);
-                //bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),clipData.getItemAt(i).getUri());
                 bitmap = rotate(bitmap, exifDegree);
                 imageList.add(bitmap);
             }
@@ -264,7 +265,6 @@ public class CreateActivity extends AppCompatActivity {
                         exifDegree = 0;
                     }
                     bitmap = BitmapFactory.decodeFile(imagePath);
-                    //bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),clipData.getItemAt(i).getUri());
                     bitmap = rotate(bitmap, exifDegree);
                     imageList.add(bitmap);
                 }
@@ -294,7 +294,6 @@ public class CreateActivity extends AppCompatActivity {
             bitmap = rotate(bitmap,exifDegree);
             imageList.add(bitmap);
             setImage();
-            //iv_result.setImageBitmap(rotate(bitmap,exifDegree));
         }
     }
 
@@ -335,22 +334,44 @@ public class CreateActivity extends AppCompatActivity {
             Bitmap bitmap = imageList.get(i);
             switch (i){
                 case 0:
-                    iv_result.setImageBitmap(bitmap);
+                    iv_result1.setImageBitmap(bitmap);
+                    iv_result1.setVisibility(View.VISIBLE);
                     break;
                 case 1:
                     iv_result2.setImageBitmap(bitmap);
+                    iv_result2.setVisibility(View.VISIBLE);
                     break;
                 case 2:
                     iv_result3.setImageBitmap(bitmap);
+                    iv_result3.setVisibility(View.VISIBLE);
                     break;
                 case 3:
                     iv_result4.setImageBitmap(bitmap);
+                    iv_result4.setVisibility(View.VISIBLE);
                     break;
                 case 4:
                     iv_result5.setImageBitmap(bitmap);
+                    iv_result5.setVisibility(View.VISIBLE);
                     break;
                 case 5:
                     iv_result6.setImageBitmap(bitmap);
+                    iv_result6.setVisibility(View.VISIBLE);
+                    break;
+                case 6:
+                    iv_result7.setImageBitmap(bitmap);
+                    iv_result7.setVisibility(View.VISIBLE);
+                    break;
+                case 7:
+                    iv_result8.setImageBitmap(bitmap);
+                    iv_result8.setVisibility(View.VISIBLE);
+                    break;
+                case 8:
+                    iv_result9.setImageBitmap(bitmap);
+                    iv_result9.setVisibility(View.VISIBLE);
+                    break;
+                case 9:
+                    iv_result10.setImageBitmap(bitmap);
+                    iv_result10.setVisibility(View.VISIBLE);
                     break;
             }
         }
