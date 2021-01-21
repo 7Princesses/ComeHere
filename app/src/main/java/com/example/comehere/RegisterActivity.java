@@ -1,14 +1,19 @@
 package com.example.comehere;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
@@ -24,13 +29,17 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,10 +49,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -57,7 +72,14 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
     private FirebaseAuth mAuth;
 
-    private Drawable pwcheckDrawable;
+    private String dburl = "https://comehere-cd02d-default-rtdb.firebaseio.com/";
+    private User inputUser;
+
+    private Dialog dialog;
+    private Button ok_btn;
+    private TextView messageTv;
+
+    private Uri imgUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +88,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-
-        findViewById(R.id.registerButton).setOnClickListener(onClickListener);
 
         // Student card Image code
         imageView = (ImageView)findViewById(R.id.studentCardImage);
@@ -79,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        // Underline in TextView
+        // Underline in login TextView
         TextView textView = (TextView)findViewById(R.id.loginButton);
         SpannableString content = new SpannableString("로그인하기");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0); textView.setText(content);
@@ -104,7 +124,6 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText pwcheck = (EditText)findViewById(R.id.passwordCheckText);
         final EditText pw = (EditText)findViewById(R.id.passwordText);
         final ImageView setImage = (ImageView)findViewById(R.id.pwImage);
-
         pwcheck.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -127,7 +146,6 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
-
         pw.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -151,19 +169,53 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        // register button click listener
+        Button register_btn = (Button)findViewById(R.id.registerButton);
+        register_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signUp();
+            }
+        });
+
+        dialog = new Dialog(this);
     }
 
-    // register button click listener
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.registerButton:
-                    signUp();
-                    break;
+    public void ShowOkPopup() {
+        dialog.setContentView(R.layout.epic_popup);
+        messageTv = (TextView)dialog.findViewById(R.id.dialogMessageText);
+        ok_btn = (Button)dialog.findViewById(R.id.okbtn);
+        ok_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+//                finish();
+                startToast(inputUser.getNickname() + "님의 가입을 환영합니다!.");
             }
-        }
-    };
+        });
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
+
+    public void Dialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(null);
+        builder.setMessage("회원가입 완료!\n이제 우리 학교 사람들과\n공동구매를 시작해보세요");
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                startToast(inputUser.getNickname() + "님의 가입을 환영합니다!");
+            }
+        });
+
+        builder.show();
+    }
 
     @Override
     public void onStart() {
@@ -174,11 +226,22 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // error but build success
-        // Preferably don't fix err
+        super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == GET_GALLERY_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri selectedImageUri = data.getData();
-            imageView.setImageURI(selectedImageUri);
+            imgUri = data.getData();
+            imageView.setImageURI(imgUri);
+        }
+
+        switch (requestCode) {
+            case 10:
+                if (resultCode == RESULT_OK) {
+                    // select image dir get
+                    imgUri = data.getData();
+                    imageView.setImageURI(imgUri);
+                    Glide.with(this).load(imgUri).into(imageView);
+                }
+                break;
         }
     }
 
@@ -205,9 +268,21 @@ public class RegisterActivity extends AppCompatActivity {
                                     String school = ((Spinner)findViewById(R.id.schoolSpinner)).getSelectedItem().toString();
                                     Integer sId = Integer.parseInt(((EditText)findViewById(R.id.studentIdText)).getText().toString().trim());
 
+                                    // Firebase Storage object
+                                    FirebaseStorage storage = FirebaseStorage.getInstance();
+
+                                    StorageReference imgRef = null;
+
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+                                    String filename = nickname+sdf.format(new Date())+".png";
+                                    String studentIdCard = "studentCard/"+filename;
+
+                                    StorageReference sRef = storage.getReference("studentCard/"+filename);
+                                    sRef.putFile(imgUri);
+
                                     // User object save in firebase
-                                    User inputUser = new User(uid, nickname, school, sId);
-                                    FirebaseDatabase database= FirebaseDatabase.getInstance();
+                                    inputUser = new User(uid, nickname, school, sId, studentIdCard);
+                                    FirebaseDatabase database= FirebaseDatabase.getInstance(dburl);
                                     DatabaseReference reference = database.getReference("User");
                                     reference.child(uid).setValue(inputUser);
 
@@ -227,11 +302,8 @@ public class RegisterActivity extends AppCompatActivity {
                                             });
 
                                     // UI Logic when success
-                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                    startToast(nickname + "님의 가입을 환영합니다!.");
-
+                                    ShowOkPopup();
+//                                    Dialog();
                                 } else {
                                     if (task.getException() != null) {
                                         // If sign in fails, display a message to the user.
@@ -247,7 +319,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             startToast(e.toString());
                                         }
 
-                                        startToast(task.getException().toString());
+//                                        startToast(task.getException().toString());
                                         // UI Logic when failed
                                     }
                                 }
