@@ -268,8 +268,8 @@ public class CreateActivity extends AppCompatActivity {
                     bitmap = rotate(bitmap, exifDegree);
                     imageList.add(bitmap);
                 }
-                setImage();
             }
+            setImage();
         }
         else if(requestCode==FROM_CAMERA && resultCode==RESULT_OK){
             Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath);
