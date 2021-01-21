@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                Intent registerIntent = new Intent(getApplicationContext(), RegisterActivity.class);
                 LoginActivity.this.startActivity(registerIntent);
             }
         });
@@ -96,9 +96,9 @@ public class LoginActivity extends AppCompatActivity {
                                 String nickname = user.getDisplayName();
 
                                 // UI logic success
-                                startToast(nickname + "님 로그인 성공!");
-                                //Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                //startActivity(intent);
+                                startToast(nickname + "님 \n여기붙어 접속을 환영합니다!");
+                                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                                startActivityForResult(intent, 101);
                                 finish();
                             } else {
                                 if (task.getException() != null) {
@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                                     }
 
                                     // If sign in fails, display a message to the user.
-                                    startToast(task.getException().toString());
+//                                    startToast(task.getException().toString());
                                 }
                             }
                         }

@@ -109,7 +109,7 @@ public class RegisterActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
                 RegisterActivity.this.startActivity(loginIntent);
             }
         });
@@ -189,9 +189,9 @@ public class RegisterActivity extends AppCompatActivity {
         ok_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
-//                finish();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                RegisterActivity.this.startActivity(intent);
+                finish();
                 startToast(inputUser.getNickname() + "님의 가입을 환영합니다!.");
             }
         });
@@ -208,7 +208,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
                 finish();
                 startToast(inputUser.getNickname() + "님의 가입을 환영합니다!");
@@ -253,7 +253,7 @@ public class RegisterActivity extends AppCompatActivity {
         String passwordCheck = ((EditText)findViewById(R.id.passwordCheckText)).getText().toString();
 
         if (email.length() > 0 && password.length() > 0 && passwordCheck.length() > 0) {
-            if (password.equals(passwordCheck)) {
+            if (password.equals(passwordCheck) && imgUri != null) {
                 // password same password check
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -327,9 +327,11 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         });
 
-            }else{
+            }else if(!password.equals(passwordCheck)) {
                 // password not same passwordcheck
                 startToast("비밀번호가 일치하지 않습니다.");
+            }else if (imgUri == null) {
+                startToast("학생증을 등록해주세요.");
             }
         }else {
             startToast("이메일 또는 비밀번호를 입력해주세요.");

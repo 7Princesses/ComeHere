@@ -18,19 +18,23 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:background="#ffffff">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/school_logo"
             android:layout_marginLeft="130dp"/>
+
         <TextView
+            android:id="@+id/schoolText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_gravity="center"
             android:text="인하대학교"
+            android:layout_gravity="center"
             android:textColor="#000000"
             android:textSize="20sp"/>
+
     </androidx.appcompat.widget.Toolbar>
     <FrameLayout
         android:layout_width="match_parent"
@@ -39,29 +43,29 @@
         android:layout_gravity="center"
         android:orientation="horizontal"
         android:background="#ffffff">
-    <FrameLayout
-        android:layout_width="340dp"
-        android:layout_height="48dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="70dp"
-        android:orientation="horizontal"
-        android:background="@drawable/search_border">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="140dp"
-            android:src="@drawable/search_logo"/>
-        <TextView
-            android:id="@+id/tx_search"
-            android:layout_width="280dp"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_gravity="center"
-            android:textColor="#4a4a4a"
-            />
-    </FrameLayout>
+        <FrameLayout
+            android:layout_width="340dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="70dp"
+            android:orientation="horizontal"
+            android:background="@drawable/search_border">
+            <ImageView
+                android:id="@+id/searchImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="140dp"
+                android:src="@drawable/search_logo"/>
+            <EditText
+                android:id="@+id/tx_search"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:gravity="left"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center"
+                android:textColor="#4a4a4a"/>
+        </FrameLayout>
         <RelativeLayout
             android:layout_width="350dp"
             android:layout_gravity="center"
