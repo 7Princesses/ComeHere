@@ -18,7 +18,7 @@
         <item >
             <bitmap
             android:gravity="left|center"
-                android:src="@drawable/podision" />
+                android:src="@drawable/point" />
         </item>
     </layer-list>
     </item>

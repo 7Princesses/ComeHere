@@ -1,7 +1,9 @@
 package com.example.comehere;
 
+import java.util.ArrayList;
+
 public class Article {
-    private String articleTitle;
+    private String articleCode;
     private String productName;
     private Integer totalPrice;
     private String URL;
@@ -11,10 +13,11 @@ public class Article {
     private String unit;
     private String content;
     private String UID;
+    private ArrayList<String> imageList;
 
     public Article() {}
-    public Article(String articleCode, String productName, Integer totalPrice, String URL, String tradePlace, String category, Integer productCount, String unit, String content, String UID) {
-        this.articleTitle = articleCode;
+    public Article(String articleCode, String productName, Integer totalPrice, String URL, String tradePlace, String category, Integer productCount, String unit, String content, String UID, ArrayList<String> imageList) {
+        this.articleCode = articleCode;
         this.productName = productName;
         this.totalPrice = totalPrice;
         this.URL = URL;
@@ -24,6 +27,7 @@ public class Article {
         this.unit = unit;
         this.content = content;
         this.UID = UID;
+        this.imageList = imageList;
     }
 
     public String getProductName() {
@@ -98,11 +102,19 @@ public class Article {
         this.UID = UID;
     }
 
-    public String getArticleTitle() {
-        return articleTitle;
+    public ArrayList<String> getImageList() {
+        return imageList;
     }
 
-    public void setArticleTitle(String articleTitle) {
-        this.articleTitle = articleTitle;
+    public void setImageList(ArrayList<String> imageList) {
+        this.imageList = imageList;
+    }
+
+    public String getArticleCode() {
+        return articleCode;
+    }
+
+    public void setArticleCode(String articleCode) {
+        this.articleCode = articleCode;
     }
 }

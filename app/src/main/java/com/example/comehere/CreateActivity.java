@@ -29,11 +29,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -56,11 +61,19 @@ public class CreateActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
 
+        // Auth Initialize
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+
+        // image
         add_pic = findViewById(R.id.btn_capture);
 
         iv_result1 = findViewById(R.id.iv_result1); iv_result1.setVisibility(View.GONE);
@@ -112,8 +125,9 @@ public class CreateActivity extends AppCompatActivity {
         postbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 // article data
-                String articleTitle = ((EditText)findViewById(R.id.articleTitle)).getText().toString();
                 String productName = ((EditText)findViewById(R.id.productTitle)).getText().toString();
                 Integer totalPrice = Integer.parseInt(((EditText)findViewById(R.id.totalPrice)).getText().toString());
                 String URL = ((EditText)findViewById(R.id.productLink)).getText().toString();
@@ -122,12 +136,36 @@ public class CreateActivity extends AppCompatActivity {
                 Integer productCount = Integer.parseInt(((Spinner)findViewById(R.id.count_spinner)).getSelectedItem().toString());
                 String unit = ((Spinner)findViewById(R.id.spinner_unit)).getSelectedItem().toString();
                 String content = ((EditText)findViewById(R.id.productContent)).getText().toString();
-                String uid = "5G8pWcXveSSUQKO6hZ6VIaeW8fg1"; // change the FirebaseUser user = mAuth.getCurrentUser();
+                String uid = user.getUid(); // change the FirebaseUser user = mAuth.getCurrentUser();
 
-                Article article = new Article(articleTitle, productName, totalPrice, URL, tradePlace, category, productCount, unit, content, uid);
+                // Firebase Storage object
+                FirebaseStorage storage = FirebaseStorage.getInstance();
+                StorageReference imgRef = null;
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+                String articleCode = uid+"_"+sdf.format(new Date());
+
+                ArrayList<String> imgList = new ArrayList<>();
+
+                for (int i = 0; i < imageList.size(); i++) {
+                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                    StorageReference sRef = storage.getReference("article/image/"+articleCode+"/"+imageList.get(i).toString());
+                    Uri imgUri = getImageUri(getApplicationContext(),imageList.get(i));
+                    imgList.add("article/image/"+articleCode+"/"+imageList.get(i).toString());
+                    sRef.putFile(imgUri);
+                }
+
+                Article article = new Article(articleCode, productName, totalPrice, URL, tradePlace, category, productCount, unit, content, uid, imgList);
                 reference.push().setValue(article);
             }
         });
+    }
+
+    private Uri getImageUri(Context context, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
     }
 
     //다이얼로그 생성
