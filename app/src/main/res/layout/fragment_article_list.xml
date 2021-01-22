@@ -23,6 +23,7 @@
             android:layout_marginRight="5dp"
             android:src="@drawable/good" />
         <TextView
+            android:fontFamily="@font/seoulnamsanjang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"

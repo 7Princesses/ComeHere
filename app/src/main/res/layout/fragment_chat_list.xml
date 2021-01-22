@@ -24,6 +24,7 @@
             android:layout_height="28dp"
             android:background="@drawable/icon_nav_chat" />
         <TextView
+            android:fontFamily="@font/seoulnamsanjang"
             android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="wrap_content"

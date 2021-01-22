@@ -26,6 +26,7 @@
                 android:src="@drawable/mypage_icon" />
 
             <TextView
+                android:fontFamily="@font/seoulnamsanjang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -61,6 +62,7 @@
                 android:src="@drawable/profile_icon" />
 
             <TextView
+                android:fontFamily="@font/seoulnamsanjang"
                 android:id="@+id/userNickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,6 +73,7 @@
                 android:textSize="25sp" />
 
             <TextView
+                android:fontFamily="@font/seoulnamsanjang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
