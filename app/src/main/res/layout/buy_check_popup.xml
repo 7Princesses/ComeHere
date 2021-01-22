@@ -33,7 +33,7 @@
                 android:text="구매 신청을 하시겠습니까?"
                 android:textAlignment="center"
                 android:textColor="#Ffff"
-                android:textSize="18dp"></TextView>
+                android:textSize="17dp"></TextView>
 
             <View
                 android:id="@+id/horiLine"

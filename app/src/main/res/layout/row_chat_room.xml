@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="120dp"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+app:cardCornerRadius="8dp"
+app:cardElevation="2dp"
+app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:orientation="vertical"
@@ -17,7 +20,7 @@
             android:layout_marginStart="30dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="$roomname"
+            android:text=""
             android:textColor="#4a4a4a"
             android:textSize="20sp" />
 
@@ -42,15 +45,9 @@
                     android:layout_height="30dp"
                     android:textColor="#4a4a4a"
                     android:textSize="18sp"
-                    android:text="$roomstatus" />
+                    android:text="" />
             </LinearLayout>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_height="0.5dp"
-            android:background="#717171"/>
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -14,16 +14,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
+            android:layout_height="70dp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_gravity="center"
+                android:layout_marginRight="5dp"
                 android:src="@drawable/mypage_icon" />
 
             <TextView
@@ -32,14 +31,11 @@
                 android:gravity="center"
                 android:text="마이페이지"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textColor="#4A4A4A" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorGray2"></LinearLayout>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -48,7 +44,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:text="나의 정보"
-            android:textSize="18sp"
+            android:textSize="17sp"
             android:textStyle="bold" />
 
         <RelativeLayout
@@ -71,7 +67,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_toEndOf="@id/userProfile"
                 android:layout_toRightOf="@id/userProfile"
-                android:text="chae0382"
+                android:text=""
                 android:textSize="25sp" />
 
             <TextView
@@ -103,7 +99,7 @@
                 android:layout_marginTop="45dp"
                 android:layout_marginBottom="10dp"
                 android:layout_toRightOf="@id/email_txt"
-                android:text="chae0382@gmail.com"
+                android:text=""
                 android:textSize="15sp" />
 
             <TextView
@@ -123,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="65dp"
                 android:layout_toRightOf="@id/school_txt"
-                android:text="인하대학교"
+                android:text=""
                 android:textSize="15sp" />
 
             <TextView
@@ -144,16 +140,10 @@
                 android:layout_marginTop="85dp"
                 android:layout_marginBottom="20dp"
                 android:layout_toRightOf="@id/studentid_txt"
-                android:text="12191656"
+                android:text=""
                 android:textSize="15sp" />
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorGray2">
-
-        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -193,10 +183,7 @@
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/colorGray2"></LinearLayout>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -214,7 +201,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
-            tools:listitem="@layout/mypage_list">
+            tools:listitem="@layout/row_article">
 
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>

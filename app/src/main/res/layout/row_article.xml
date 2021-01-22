@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="110dp"
+    android:layout_height="120dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp"
@@ -16,7 +16,7 @@
             android:id="@+id/imageIv"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/profile_icon" />
 
         <TextView
             android:id="@+id/titleTv"
@@ -41,7 +41,7 @@
             android:layout_toEndOf="@id/imageIv"
             android:layout_toRightOf="@id/imageIv"
             android:text="가격"
-            android:textSize="12sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/open"
@@ -53,7 +53,7 @@
             android:layout_toEndOf="@id/priceTv"
             android:layout_toRightOf="@id/priceTv"
             android:text="원("
-            android:textSize="12sp" />
+            android:textSize="15sp" />
         <TextView
             android:id="@+id/unitTv"
             android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
             android:layout_toEndOf="@id/open"
             android:layout_toRightOf="@id/open"
             android:text="단위"
-            android:textSize="12sp" />
+            android:textSize="15sp" />
         <TextView
             android:id="@+id/close"
             android:layout_width="wrap_content"
@@ -78,11 +78,11 @@
             android:textSize="12sp" />
 
         <ImageView
-            android:layout_width="14dp"
-            android:layout_height="14dp"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
             android:layout_below="@id/priceTv"
             android:layout_marginTop="4dp"
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="3dp"
             android:layout_toLeftOf="@id/tx"
             android:src="@drawable/good" />
         <TextView
@@ -95,7 +95,7 @@
             android:layout_marginRight="2dp"
             android:layout_toLeftOf="@id/stick"
             android:text="붙은수량:"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
         <TextView
             android:id="@+id/stick"
             android:layout_width="wrap_content"
@@ -105,7 +105,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="4dp"
             android:text="붙은수량"
-           android:textSize="10sp" />
+           android:textSize="12sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
             android:gravity="right"
             android:layout_toLeftOf="@id/remain"
             android:text="남은수량:"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
         <TextView
             android:id="@+id/remain"
             android:layout_width="wrap_content"
@@ -122,7 +122,7 @@
             android:gravity="right"
             android:layout_alignParentRight="true"
             android:text="남은수량"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
