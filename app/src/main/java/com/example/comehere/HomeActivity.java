@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -52,6 +53,7 @@ public class HomeActivity extends AppCompatActivity {
                 UserData curr = dataSnapshot.getValue(UserData.class);
                 currSchool = curr.getSchool();
                 userNName = curr.getNickname();
+
                 // school text change
                 schoolText = (TextView) findViewById(R.id.schoolText);
                 schoolText.setText(currSchool);
@@ -93,7 +95,6 @@ public class HomeActivity extends AppCompatActivity {
                 // post the search data to SearchActivity
                 Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
                 intent.putExtra("productName", productName);
-
                 startActivity(intent);
             }
         });

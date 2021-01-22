@@ -19,11 +19,12 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
     private Context context;
     private ArrayList<Integer> curNum;
 
-    public ArticleListAdapter(ArrayList<ArticleData> arrayList, ArrayList<Integer> curNum ,Context context) {
+    public ArticleListAdapter(ArrayList<ArticleData> arrayList, ArrayList<Integer> curNum , Context context) {
         this.arrayList = arrayList;
         this.context = context;
         this.curNum = curNum;
     }
+
 
     @NonNull
     @Override
@@ -36,7 +37,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-       /* Glide.with(holder.itemView)
+        /* Glide.with(holder.itemView)
                 .load(arrayList.get(position).getImageIv())
                 .into(holder.imageIv);*/
 
@@ -90,7 +91,8 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-           // this.imageIv = itemView.findViewById(R.id.imageIv);
+
+            // this.imageIv = itemView.findViewById(R.id.imageIv);
             //GradientDrawable drawable = (GradientDrawable)context.getDrawable(R.drawable.image_round);
             //imageIv.setBackground(drawable);
             //imageIv.setClipToOutline(true);
