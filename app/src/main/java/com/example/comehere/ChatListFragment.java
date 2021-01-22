@@ -37,6 +37,7 @@ public class ChatListFragment extends Fragment {
         this.username = username;
     }
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

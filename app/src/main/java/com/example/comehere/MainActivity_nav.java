@@ -13,9 +13,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity_nav extends AppCompatActivity {
     private BottomNavigationView mBottomNV;
+
     private String userUID;
     private String userNickName;
     private String category;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +59,6 @@ public class MainActivity_nav extends AppCompatActivity {
             } else {
                 fragment = new MyPageFragment(userUID);
             }
-
-
             fragmentTransaction.add(R.id.nav_content_layout, fragment, tag);
         } else {
             fragmentTransaction.show(fragment);

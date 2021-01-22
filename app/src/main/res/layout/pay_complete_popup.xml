@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="30dp"
+        app:cardBackgroundColor="#FFcd21"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="20dp"
+                android:fontFamily="@font/kopubworld_dotum_medium"
+                android:text="결제를 하시겠습니까?"
+                android:textAlignment="center"
+                android:textColor="#Ffff"
+                android:textSize="18dp"/>
+
+            <View
+                android:id="@+id/horiLine"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="15dp"
+                android:background="#B1ACAC"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="150dp"
+                    android:id="@+id/btn_complete_pay_yes"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="예"
+                    android:fontFamily="@font/kopubworld_dotum_medium"
+                    android:textColor="#ffff"
+                    android:textSize="15dp"
+                    android:background="@null"/>
+
+                <View
+
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="#B1ACAC"
+                    android:layout_gravity="center"/>
+
+                <Button
+                    android:id="@+id/btn_complete_pay_no"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="아니오"
+                    android:textSize="15dp"
+                    android:fontFamily="@font/kopubworld_dotum_medium"
+                    android:textColor="#ffff"
+                    android:background="@null"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

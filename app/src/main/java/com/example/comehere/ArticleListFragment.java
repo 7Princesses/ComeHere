@@ -30,11 +30,13 @@ public class ArticleListFragment extends Fragment {
     private FirebaseDatabase database;
     private DatabaseReference dbReference;
     private ArrayList<ChatRoom> allRooms;
+
     private String category;
 
     public ArticleListFragment(String category){
         this.category = category;
     }
+
 
     @Nullable
     @Override

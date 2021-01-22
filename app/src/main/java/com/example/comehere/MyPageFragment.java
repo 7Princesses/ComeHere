@@ -39,7 +39,6 @@ public class MyPageFragment extends Fragment {
         this.uid = uid;
     }
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
