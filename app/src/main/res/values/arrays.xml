@@ -11,4 +11,40 @@
         <item>인하대학교</item>
         <item>인천대학교</item>
     </string-array>
+
+    <string-array name="position">
+        <item>거래 위치</item>
+        <item>비룡플라자</item>
+        <item>하이테크관</item>
+        <item>본관</item>
+        <item>정석도서관</item>
+        <item>5호관</item>
+    </string-array>
+
+    <string-array name="category">
+        <item>카테고리</item>
+        <item>화장품</item>
+        <item>욕실용품</item>
+        <item>식품</item>
+        <item>인테리어</item>
+        <item>청소용품</item>
+        <item>의류</item>
+        <item>문구류</item>
+        <item>주방용품</item>
+        <item>기타</item>
+    </string-array>
+
+    <string-array name="counting">
+        <item>수량</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
 </resources>

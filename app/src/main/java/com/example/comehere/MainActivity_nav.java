@@ -53,7 +53,7 @@ public class MainActivity_nav extends AppCompatActivity {
             if (id == R.id.nav_home) {
                 fragment = new ArticleListFragment(category);
             } else if (id == R.id.nav_postwrite){
-                fragment = new ChatListFragment(userNickName);
+                fragment = new CreateFragment();
             } else if (id == R.id.nav_chat){
                 fragment = new ChatListFragment(userNickName);
             } else {

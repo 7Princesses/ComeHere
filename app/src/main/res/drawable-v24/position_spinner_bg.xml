@@ -15,6 +15,12 @@
                 </stroke>
         </shape>
         </item>
+        <item >
+            <bitmap
+            android:gravity="left|center"
+                android:src="@drawable/point" />
+        </item>
     </layer-list>
     </item>
+
 </selector>
